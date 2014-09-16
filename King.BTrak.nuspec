@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>King.BTrak</id>
+        <version>0.0.1</version>
+        <title>King.ATrak</title>
+        <authors>Jef King</authors>
+        <owners>Jef King</owners>
+        <licenseUrl>https://github.com/jefking/King.B-Trak/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/jefking/King.B-Trak</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/jefking/King.B-Trak/master/icon.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Synchronize files between SQL Server and Azure Table Storage.</description>
+        <summary>Synchronize files between SQL Server and Azure Table Storage.</summary>
+        <releaseNotes />
+        <copyright>Jef King</copyright>
+        <language>en-US</language>
+        <tags>King.BTrak Azure SQL Server SQL-Server Synchronize</tags>
+    </metadata>
+    <files>
+    </files>
+</package>
