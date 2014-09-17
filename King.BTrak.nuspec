@@ -12,11 +12,14 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Synchronize files between SQL Server and Azure Table Storage.</description>
         <summary>Synchronize files between SQL Server and Azure Table Storage.</summary>
-        <releaseNotes />
+      <releaseNotes>Pre-Alpha</releaseNotes>
         <copyright>Jef King</copyright>
         <language>en-US</language>
         <tags>King.BTrak Azure SQL Server SQL-Server Synchronize</tags>
     </metadata>
     <files>
+        <file src="King.BTrak.Program\bin\Release\King.B-Trak.dll" target="content\King.BTrak\King.B-Trak.dll" />
+        <file src="King.BTrak.Program\bin\Release\King.BTrak.Program.exe" target="content\King.BTrak\King.BTrak.Program.exe" />
+        <file src="King.BTrak.Program\bin\Release\King.BTrak.Program.exe.config" target="content\King.BTrak\King.BTrak.Program.exe.config" />
     </files>
 </package>

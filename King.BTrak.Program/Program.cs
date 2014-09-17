@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace King.B_Trak
+namespace King.BTrak.Program
 {
     class Program
     {

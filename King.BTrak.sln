@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.BTrak.Core", "King.B-Trak\King.BTrak.Core.csproj", "{416CE6C0-DA4D-44A4-9E98-A8B7A8B17F16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.BTrak.Program", "King.BTrak.Program\King.BTrak.Program.csproj", "{A5D70140-4EF9-44F3-A223-958334711FD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3C3F7E76-7CB4-4EFB-A139-3080A795551B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.BTrak.Unit.Test", "King.BTrak.Unit.Test\King.BTrak.Unit.Test.csproj", "{988E2BD5-E04A-4D4D-8833-7989E7CF829F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{416CE6C0-DA4D-44A4-9E98-A8B7A8B17F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{416CE6C0-DA4D-44A4-9E98-A8B7A8B17F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{416CE6C0-DA4D-44A4-9E98-A8B7A8B17F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{416CE6C0-DA4D-44A4-9E98-A8B7A8B17F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D70140-4EF9-44F3-A223-958334711FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D70140-4EF9-44F3-A223-958334711FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D70140-4EF9-44F3-A223-958334711FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D70140-4EF9-44F3-A223-958334711FD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{988E2BD5-E04A-4D4D-8833-7989E7CF829F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{988E2BD5-E04A-4D4D-8833-7989E7CF829F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{988E2BD5-E04A-4D4D-8833-7989E7CF829F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{988E2BD5-E04A-4D4D-8833-7989E7CF829F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{988E2BD5-E04A-4D4D-8833-7989E7CF829F} = {3C3F7E76-7CB4-4EFB-A139-3080A795551B}
+	EndGlobalSection
+EndGlobal
