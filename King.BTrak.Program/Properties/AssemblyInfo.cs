@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("King.BTrak.Program")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Synchronize Between SQL Server and Azure Table Storage")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("King.BTrak.Program")]
