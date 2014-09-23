@@ -1,9 +1,8 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("King.BTrak.Unit.Test")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Unit Tests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("King.BTrak.Unit.Test")]
