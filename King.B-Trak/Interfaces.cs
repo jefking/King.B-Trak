@@ -29,4 +29,12 @@
         #endregion
     }
     #endregion
+
+    #region ISynchronizer
+    public interface ISynchronizer
+    {
+        ISynchronizer Initialize();
+        ISynchronizer Run();
+    }
+    #endregion
 }

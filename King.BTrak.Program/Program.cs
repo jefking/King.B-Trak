@@ -1,10 +1,7 @@
 ﻿namespace King.BTrak.Program
 {
-    using King.Azure.Data;
     using System;
-    using System.Data.SqlClient;
     using System.Diagnostics;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// B-Trak synchronizer, from SQL Server to Azure Table Storage
@@ -29,10 +26,9 @@
                     , config.StorageTableName
                     , Environment.NewLine);
 
-                var database = new SqlConnection(config.SQLConenctionString);
-                var table = new TableStorage(config.StorageTableName, config.StorageAccountConnectionString);
-
-                Task.WaitAll(database.OpenAsync(), table.CreateIfNotExists());
+                new Synchronizer(config)
+                    .Initialize()
+                    .Run();
             }
             catch (Exception ex)
             {
