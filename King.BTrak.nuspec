@@ -10,12 +10,12 @@
         <projectUrl>https://github.com/jefking/King.B-Trak</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/jefking/King.B-Trak/master/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Synchronize files between SQL Server and Azure Table Storage.</description>
-        <summary>Synchronize files between SQL Server and Azure Table Storage.</summary>
+        <description>Synchronize data between SQL Server and Azure Table Storage.</description>
+        <summary>Synchronize data between SQL Server and Azure Table Storage.</summary>
       <releaseNotes>Pre-Alpha</releaseNotes>
         <copyright>Jef King</copyright>
         <language>en-US</language>
-        <tags>King.BTrak Azure SQL Server SQL-Server Synchronize</tags>
+        <tags>King.BTrak Azure SQL Server SQL-Server Synchronize data sync table-storage tables</tags>
     </metadata>
     <files>
         <file src="King.BTrak.Program\bin\Release\King.BTrak.dll" target="content\King.BTrak\King.BTrak.dll" />
