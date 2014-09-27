@@ -17,7 +17,7 @@
         {
             try
             {
-
+                var parameters = new Parameters(args);
             }
             catch (Exception ex)
             {
