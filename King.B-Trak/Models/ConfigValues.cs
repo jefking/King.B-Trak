@@ -1,21 +1,37 @@
 ﻿namespace King.BTrak.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ConfigValues : IConfigValues
     {
-        public virtual string SQLConenctionString
+        #region Properties
+        /// <summary>
+        /// SQL Conenction String
+        /// </summary>
+        public virtual string SQLConenction
         {
             get;
             set;
         }
-        public virtual string StorageAccountConnectionString
+
+        /// <summary>
+        /// Storage Account Connection String
+        /// </summary>
+        public virtual string StorageAccountConnection
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// Storage Table Name
+        /// </summary>
         public virtual string StorageTableName
         {
             get;
             set;
         }
+        #endregion
     }
 }

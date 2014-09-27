@@ -26,12 +26,16 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public virtual IConfigValues Process()
         {
             var config = new ConfigValues
             {
-                SQLConenctionString = this.arguments.ElementAt(0),
-                StorageAccountConnectionString = this.arguments.ElementAt(1),
+                SQLConenction = this.arguments.ElementAt(0),
+                StorageAccountConnection = this.arguments.ElementAt(1),
                 StorageTableName = ConfigurationManager.AppSettings["StorageTable"],
             };
 
