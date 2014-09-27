@@ -2,6 +2,7 @@
 {
     using King.Azure.Data;
     using System.Data.SqlClient;
+    using System.Diagnostics;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -34,10 +35,14 @@
         /// <returns></returns>
         public ISynchronizer Initialize()
         {
+            Trace.TraceInformation("Initializing...");
+
             var database = new SqlConnection(config.SQLConenction);
             var table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
 
             Task.WaitAll(database.OpenAsync(), table.CreateIfNotExists());
+
+            Trace.TraceInformation("Initialized.");
 
             return this;
         }
@@ -48,6 +53,9 @@
         /// <returns></returns>
         public ISynchronizer Run()
         {
+            Trace.TraceInformation("Running...");
+
+            Trace.TraceInformation("Ran.");
 
             return this;
         }
