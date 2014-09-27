@@ -28,7 +28,7 @@
                 var database = new SqlConnection(config.SQLConenctionString);
                 var table = new TableStorage(config.StorageTableName, config.StorageAccountConnectionString);
 
-                Task.WaitAll(table.CreateIfNotExists(), database.OpenAsync());
+                Task.WaitAll(database.OpenAsync(), table.CreateIfNotExists());
             }
             catch (Exception ex)
             {
