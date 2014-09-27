@@ -12,7 +12,7 @@
         /// <summary>
         /// Arguments
         /// </summary>
-        protected readonly string[] arguments;
+        protected readonly IEnumerable<string> arguments;
         #endregion
 
         #region Constructors
@@ -20,7 +20,7 @@
         /// Parameters
         /// </summary>
         /// <param name="arguments">Arguments</param>
-        public Parameters(string[] arguments)
+        public Parameters(IEnumerable<string> arguments)
         {
             this.arguments = arguments;
         }
@@ -29,7 +29,10 @@
         #region Methods
         public virtual object Process()
         {
-            throw new NotImplementedException();
+            string sqlConnection = this.arguments.ElementAt(0);
+            string storageAccount = this.arguments.ElementAt(1);
+
+            return null;
         }
         #endregion
     }

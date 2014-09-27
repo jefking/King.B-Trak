@@ -18,6 +18,7 @@
             try
             {
                 var parameters = new Parameters(args);
+                var process = parameters.Process();
             }
             catch (Exception ex)
             {
