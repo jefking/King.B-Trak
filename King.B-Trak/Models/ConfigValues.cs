@@ -12,5 +12,10 @@
             get;
             set;
         }
+        public virtual string StorageTableName
+        {
+            get;
+            set;
+        }
     }
 }

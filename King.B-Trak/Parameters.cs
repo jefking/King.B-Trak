@@ -2,6 +2,7 @@
 {
     using King.BTrak.Models;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
 
     public class Parameters : IParameters
@@ -31,6 +32,7 @@
             {
                 SQLConenctionString = this.arguments.ElementAt(0),
                 StorageAccountConnectionString = this.arguments.ElementAt(1),
+                StorageTableName = ConfigurationManager.AppSettings["StorageTable"],
             };
 
             return config;

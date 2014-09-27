@@ -22,6 +22,10 @@
         {
             get;
         }
+        string StorageTableName
+        {
+            get;
+        }
         #endregion
     }
     #endregion
