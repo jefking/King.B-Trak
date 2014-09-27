@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// B-Trak synchronizer, from SQL Server to Azure Table Storage
@@ -18,7 +19,10 @@
             try
             {
                 var parameters = new Parameters(args);
-                var process = parameters.Process();
+                var config = parameters.Process();
+
+                var table = new King.Azure.Data.TableStorage(config.StorageTableName, config.StorageAccountConnectionString);
+                Task.Run(() => table.CreateIfNotExists());
             }
             catch (Exception ex)
             {
