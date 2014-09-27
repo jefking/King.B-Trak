@@ -5,6 +5,9 @@
     using System.Configuration;
     using System.Linq;
 
+    /// <summary>
+    /// Command Line Parameters
+    /// </summary>
     public class Parameters : IParameters
     {
         #region Members
@@ -32,14 +35,12 @@
         /// <returns></returns>
         public virtual IConfigValues Process()
         {
-            var config = new ConfigValues
+            return new ConfigValues
             {
                 SQLConenction = this.arguments.ElementAt(0),
                 StorageAccountConnection = this.arguments.ElementAt(1),
                 StorageTableName = ConfigurationManager.AppSettings["StorageTable"],
             };
-
-            return config;
         }
         #endregion
     }
