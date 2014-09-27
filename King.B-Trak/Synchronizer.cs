@@ -15,7 +15,17 @@
         /// <summary>
         /// Configuration Values
         /// </summary>
-        protected readonly IConfigValues config;
+        protected readonly IConfigValues config = null;
+
+        /// <summary>
+        /// SQL Connection
+        /// </summary>
+        protected SqlConnection database = null;
+
+        /// <summary>
+        /// Table Storage
+        /// </summary>
+        protected ITableStorage table = null;
         #endregion
 
         #region Constructors
@@ -43,10 +53,10 @@
         {
             Trace.TraceInformation("Initializing...");
 
-            var database = new SqlConnection(config.SQLConenction);
-            var table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
+            this.database = new SqlConnection(config.SQLConenction);
+            this.table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
 
-            Task.WaitAll(database.OpenAsync(), table.CreateIfNotExists());
+            Task.WaitAll(this.database.OpenAsync(), this.table.CreateIfNotExists());
 
             Trace.TraceInformation("Initialized.");
 
