@@ -23,7 +23,11 @@
                 var parameters = new Parameters(args);
                 var config = parameters.Process();
 
-                Trace.TraceInformation("{0}{3}{1}{3}{2}{3}", config.SQLConenctionString, config.StorageAccountConnectionString, config.StorageTableName, Environment.NewLine);
+                Trace.TraceInformation("SQL Server Connection String: '{0}'{3}Storage Account: '{1}'{3}Table Name: '{2}'{3}"
+                    , config.SQLConenctionString
+                    , config.StorageAccountConnectionString
+                    , config.StorageTableName
+                    , Environment.NewLine);
 
                 var database = new SqlConnection(config.SQLConenctionString);
                 var table = new TableStorage(config.StorageTableName, config.StorageAccountConnectionString);
