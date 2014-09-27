@@ -13,16 +13,16 @@
     {
         #region Members
         /// <summary>
-        /// 
+        /// Configuration Values
         /// </summary>
         protected readonly IConfigValues config;
         #endregion
 
         #region Constructors
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
-        /// <param name="config"></param>
+        /// <param name="config">Configuration Values</param>
         public Synchronizer(IConfigValues config)
         {
             if (null == config)
@@ -36,10 +36,10 @@
 
         #region Methods
         /// <summary>
-        /// 
+        /// Innitialize Members
         /// </summary>
         /// <returns></returns>
-        public ISynchronizer Initialize()
+        public virtual ISynchronizer Initialize()
         {
             Trace.TraceInformation("Initializing...");
 
@@ -54,10 +54,10 @@
         }
 
         /// <summary>
-        /// 
+        /// Run Synchronization
         /// </summary>
         /// <returns></returns>
-        public ISynchronizer Run()
+        public virtual ISynchronizer Run()
         {
             Trace.TraceInformation("Running...");
 
