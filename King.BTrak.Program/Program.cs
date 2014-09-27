@@ -1,6 +1,8 @@
 ﻿namespace King.BTrak.Program
 {
+    using King.Azure.Data;
     using System;
+    using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Threading.Tasks;
 
@@ -21,8 +23,12 @@
                 var parameters = new Parameters(args);
                 var config = parameters.Process();
 
-                var table = new King.Azure.Data.TableStorage(config.StorageTableName, config.StorageAccountConnectionString);
-                Task.Run(() => table.CreateIfNotExists());
+                Trace.TraceInformation("{0}{3}{1}{3}{2}{3}", config.SQLConenctionString, config.StorageAccountConnectionString, config.StorageTableName, Environment.NewLine);
+
+                var database = new SqlConnection(config.SQLConenctionString);
+                var table = new TableStorage(config.StorageTableName, config.StorageAccountConnectionString);
+
+                Task.WaitAll(table.CreateIfNotExists(), database.OpenAsync());
             }
             catch (Exception ex)
             {
