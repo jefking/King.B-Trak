@@ -4,7 +4,24 @@
     public interface IParameters
     {
         #region Methods
-        object Process();
+        IConfigValues Process();
+        #endregion
+    }
+    #endregion
+
+    #region IConfigValues
+    public interface IConfigValues
+    {
+        #region Properties
+        string SQLConenctionString
+        {
+            get;
+        }
+
+        string StorageAccountConnectionString
+        {
+            get;
+        }
         #endregion
     }
     #endregion

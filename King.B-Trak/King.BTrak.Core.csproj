@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces.cs" />
+    <Compile Include="Models\ConfigValues.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

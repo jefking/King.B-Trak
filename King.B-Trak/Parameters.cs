@@ -1,10 +1,8 @@
 ﻿namespace King.BTrak
 {
-    using System;
+    using King.BTrak.Models;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class Parameters : IParameters
     {
@@ -27,12 +25,15 @@
         #endregion
 
         #region Methods
-        public virtual object Process()
+        public virtual IConfigValues Process()
         {
-            string sqlConnection = this.arguments.ElementAt(0);
-            string storageAccount = this.arguments.ElementAt(1);
+            var config = new ConfigValues
+            {
+                SQLConenctionString = this.arguments.ElementAt(0),
+                StorageAccountConnectionString = this.arguments.ElementAt(1),
+            };
 
-            return null;
+            return config;
         }
         #endregion
     }
