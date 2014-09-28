@@ -15,8 +15,6 @@
         /// <param name="args">Program Arguments</param>
         public static void Main(string[] args)
         {
-            Trace.WriteLine(string.Empty);
-
             try
             {
                 var parameters = new Parameters(args);
