@@ -82,10 +82,12 @@
 
             Trace.TraceInformation("Loading SQL Server Data.");
             //Start loading and mapping data for transfer
+            //Load data into dictionaries?
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
             //Store data to Table storage.
+            //How to store dictionary into Entity...
             Trace.TraceInformation("Stored SQL Server Data.");
 
             Trace.TraceInformation("Ran.");
