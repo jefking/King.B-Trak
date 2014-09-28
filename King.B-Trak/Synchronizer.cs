@@ -88,7 +88,7 @@
             foreach (var schema in schemas.Values)
             {
                 var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK)", schema.Preface, schema.Name);
-                var loader = new DataLoader
+                //var loader = new DataLoader
                 Trace.TraceInformation(sql);
             }
 
