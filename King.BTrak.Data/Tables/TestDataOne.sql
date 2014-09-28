@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[TestDataOne]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(50) NOT NULL, 
+    [Cost] MONEY NOT NULL DEFAULT 0
+)

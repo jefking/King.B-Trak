@@ -56,6 +56,7 @@
 
             using (this.database = new SqlConnection(config.SQLConenction))
             {
+                //Make sure we can connect to the database
                 this.database.OpenAsync().Wait();
             }
 
@@ -76,13 +77,20 @@
             Trace.TraceInformation("Running...");
 
             Trace.TraceInformation("Loading Database Schema.");
-            var reader = new SchemaReader(this.config.SQLConenction);
-            var schema = reader.Load(SchemaTypes.Table).Result;
+            var reader = new SchemaReader(this.config.SQLConenction); // Pass in for injection
+            var schemas = reader.Load(SchemaTypes.Table).Result;
             Trace.TraceInformation("Loaded Database Schema.");
 
             Trace.TraceInformation("Loading SQL Server Data.");
             //Start loading and mapping data for transfer
             //Load data into dictionaries?
+
+            foreach (var schema in schemas.Values)
+            {
+                var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK)", schema.Preface, schema.Name);
+                Trace.TraceInformation(sql);
+            }
+
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
