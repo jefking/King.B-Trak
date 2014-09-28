@@ -1,4 +1,5 @@
-﻿namespace King.BTrak
+﻿using System.Threading.Tasks;
+namespace King.BTrak
 {
     #region IParameters
     /// <summary>
@@ -52,20 +53,20 @@
 
     #region ISynchronizer
     /// <summary>
-    /// 
+    /// Data Synchronizer
     /// </summary>
     public interface ISynchronizer
     {
         /// <summary>
-        /// 
+        /// Initialize
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Self</returns>
         ISynchronizer Initialize();
 
         /// <summary>
-        /// 
+        /// Run
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Self</returns>
         ISynchronizer Run();
     }
     #endregion
