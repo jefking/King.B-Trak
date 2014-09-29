@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
-namespace King.BTrak
+﻿namespace King.BTrak
 {
+    using King.BTrak.Models;
+    using System.Threading.Tasks;
+
     #region IParameters
     /// <summary>
     /// 
@@ -13,40 +15,6 @@ namespace King.BTrak
         /// </summary>
         /// <returns></returns>
         IConfigValues Process();
-        #endregion
-    }
-    #endregion
-
-    #region IConfigValues
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IConfigValues
-    {
-        #region Properties
-        /// <summary>
-        /// 
-        /// </summary>
-        string SQLConenction
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        string StorageAccountConnection
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        string StorageTableName
-        {
-            get;
-        }
         #endregion
     }
     #endregion

@@ -18,11 +18,14 @@
         protected SqlConnection database = null;
         #endregion
 
+        #region Constructors
         public SqlDataLoader(SqlConnection database)
         {
             this.database = database;
         }
+        #endregion
 
+        #region Methods
         public IList<TableData> Retrieve(IDictionary<int, IDefinition> schemas)
         {
             //Injectable
@@ -53,5 +56,6 @@
 
             return tables;
         }
+        #endregion
     }
 }

@@ -47,8 +47,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\King.Azure.1.0.16\lib\net451\King.Azure.dll</HintPath>
     </Reference>
-    <Reference Include="King.Data.Sql.Reflection">
-      <HintPath>..\packages\King.Data.Sql.Reflection.1.0.0\lib\net451\King.Data.Sql.Reflection.dll</HintPath>
+    <Reference Include="King.Data.Sql.Reflection, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\King.Data.Sql.Reflection.1.0.1\lib\net451\King.Data.Sql.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="King.Mapper, Version=1.3.0.10, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -89,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Interfaces.cs" />
     <Compile Include="Models\ConfigValues.cs" />
+    <Compile Include="Models\Interfaces.cs" />
     <Compile Include="Models\TableData.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

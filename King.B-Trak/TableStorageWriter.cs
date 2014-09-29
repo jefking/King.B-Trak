@@ -6,6 +6,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Table Storage Writer
+    /// </summary>
     public class TableStorageWriter
     {
         #region Members
@@ -15,11 +18,14 @@
         protected readonly ITableStorage table = null;
         #endregion
 
+        #region Constructors
         public TableStorageWriter(ITableStorage table)
         {
             this.table = table;
         }
+        #endregion
 
+        #region Methods
         public virtual async Task Store(IList<TableData> tables)
         {
             foreach (var table in tables)
@@ -32,5 +38,6 @@
                 }
             }
         }
+        #endregion
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace King.BTrak
 {
     using King.Azure.Data;
+    using King.BTrak.Models;
     using King.Data.Sql.Reflection;
     using System;
     using System.Data.SqlClient;

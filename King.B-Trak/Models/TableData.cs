@@ -8,12 +8,12 @@
     public class TableData
     {
         #region Properties
-        public IEnumerable<IDictionary<string, object>> Data
+        public virtual IEnumerable<IDictionary<string, object>> Data
         {
             get;
             set;
         }
-        public string Name
+        public virtual string Name
         {
             get;
             set;
