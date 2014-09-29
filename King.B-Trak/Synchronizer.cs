@@ -1,16 +1,15 @@
 ﻿namespace King.BTrak
 {
     using King.Azure.Data;
+    using King.BTrak.Models;
     using King.Data.Sql.Reflection;
     using King.Mapper.Data;
     using System;
-    using System.Linq;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
-    using King.BTrak.Models;
+    using System.Linq;
 
     /// <summary>
     /// 
@@ -80,6 +79,7 @@
             //Injectable
             var loader = new Loader<object>();
             var reader = new SchemaReader(this.config.SQLConenction);
+            var writer = new TableStorageWriter(this.table);
 
             Trace.TraceInformation("Loading Database Schema.");
             var schemas = reader.Load(SchemaTypes.Table).Result;
@@ -112,15 +112,7 @@
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
-            foreach (var table in tables)
-            {
-                foreach (var entity in table.Data)
-                {
-                    entity.Add(TableStorage.PartitionKey, table.Name);
-                    entity.Add(TableStorage.RowKey, Guid.NewGuid());
-                    this.table.InsertOrReplace(entity).Wait();
-                }
-            }
+            writer.Store(tables).Wait();
             Trace.TraceInformation("Stored SQL Server Data.");
 
             Trace.TraceInformation("Ran.");
