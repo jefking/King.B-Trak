@@ -9,6 +9,8 @@
     using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using King.BTrak.Models;
 
     /// <summary>
     /// 
@@ -82,7 +84,7 @@
             Trace.TraceInformation("Loaded Database Schema.");
 
             Trace.TraceInformation("Loading SQL Server Data.");
-
+            var tables = new List<TableData>();
             foreach (var schema in schemas.Values)
             {
                 var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK)", schema.Preface, schema.Name);
@@ -97,18 +99,28 @@
                 var table = ds.Tables[0];
 
                 var loader = new Loader<object>();
-                var data = loader.Dictionaries(table);
-
-                Trace.TraceInformation("Rows Read: {0}", data.Count());
+                var data = new TableData
+                {
+                    Data = loader.Dictionaries(table),
+                    Name = string.Format("{0}{1}", schema.Preface, schema.Name),
+                };
+                tables.Add(data);
+                Trace.TraceInformation("Rows Read: {0}", data.Data.Count());
             }
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
 
-            //OH YEA, Ready to STORE DATA
+            foreach (var table in tables)
+            {
+                foreach (var entity in table.Data)
+                {
+                    entity.Add(TableStorage.PartitionKey, table.Name);
+                    entity.Add(TableStorage.RowKey, Guid.NewGuid().ToString());
+                    this.table.InsertOrReplace(entity).Wait();
+                }
+            }
 
-            //Store data to Table storage.
-            //How to store dictionary into Entity...
             Trace.TraceInformation("Stored SQL Server Data.");
 
             Trace.TraceInformation("Ran.");
