@@ -117,7 +117,7 @@
                 foreach (var entity in table.Data)
                 {
                     entity.Add(TableStorage.PartitionKey, table.Name);
-                    entity.Add(TableStorage.RowKey, Guid.NewGuid().ToString());
+                    entity.Add(TableStorage.RowKey, Guid.NewGuid());
                     this.table.InsertOrReplace(entity).Wait();
                 }
             }
