@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Threading;
 
     /// <summary>
     /// B-Trak synchronizer, from SQL Server to Azure Table Storage
@@ -15,6 +16,8 @@
         /// <param name="args">Program Arguments</param>
         public static void Main(string[] args)
         {
+            Trace.TraceInformation("Starting...");
+
             try
             {
                 var parameters = new Parameters(args);
@@ -36,6 +39,8 @@
             }
 
             Trace.TraceInformation("Completed.");
+
+            Thread.Sleep(2000);
         }
         #endregion
     }
