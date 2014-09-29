@@ -33,7 +33,8 @@
                 foreach (var entity in table.Data)
                 {
                     entity.Add(TableStorage.PartitionKey, table.Name);
-                    entity.Add(TableStorage.RowKey, Guid.NewGuid());//Temporary, needs to be based off of Primary Key
+                    var rowKey = entity[table.PrimaryKey] ?? Guid.NewGuid();
+                    entity.Add(TableStorage.RowKey, rowKey);
                     await this.table.InsertOrReplace(entity);
                 }
             }

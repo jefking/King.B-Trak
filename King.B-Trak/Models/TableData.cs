@@ -18,6 +18,11 @@
             get;
             set;
         }
+        public virtual string PrimaryKey
+        {
+            get;
+            set;
+        }
         #endregion
     }
 }

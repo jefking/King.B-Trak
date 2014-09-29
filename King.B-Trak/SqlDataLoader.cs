@@ -44,11 +44,14 @@
                 var ds = new DataSet();
                 adapter.Fill(ds);
                 var table = ds.Tables[0];
-
+                var key = (from v in schema.Variables
+                          where v.IsPrimaryKey
+                          select v.ParameterName).FirstOrDefault();
                 var data = new TableData
                 {
                     Data = loader.Dictionaries(table),
                     Name = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),
+                    PrimaryKey = key,
                 };
                 tables.Add(data);
                 Trace.TraceInformation("Rows Read: {0}", data.Data.Count());
