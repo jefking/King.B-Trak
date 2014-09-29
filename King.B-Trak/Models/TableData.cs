@@ -2,8 +2,12 @@
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Table Data
+    /// </summary>
     public class TableData
     {
+        #region Properties
         public IEnumerable<IDictionary<string, object>> Data
         {
             get;
@@ -14,5 +18,6 @@
             get;
             set;
         }
+        #endregion
     }
 }

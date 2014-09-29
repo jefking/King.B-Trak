@@ -77,9 +77,11 @@
         public virtual ISynchronizer Run()
         {
             Trace.TraceInformation("Running...");
+            //Injectable
+            var loader = new Loader<object>();
+            var reader = new SchemaReader(this.config.SQLConenction);
 
             Trace.TraceInformation("Loading Database Schema.");
-            var reader = new SchemaReader(this.config.SQLConenction); // Pass in for injection
             var schemas = reader.Load(SchemaTypes.Table).Result;
             Trace.TraceInformation("Loaded Database Schema.");
 
@@ -98,19 +100,18 @@
                 adapter.Fill(ds);
                 var table = ds.Tables[0];
 
-                var loader = new Loader<object>();
                 var data = new TableData
                 {
                     Data = loader.Dictionaries(table),
-                    Name = string.Format("{0}{1}", schema.Preface, schema.Name),
+                    Name = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),
                 };
                 tables.Add(data);
                 Trace.TraceInformation("Rows Read: {0}", data.Data.Count());
             }
+            this.database.Close();
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
-
             foreach (var table in tables)
             {
                 foreach (var entity in table.Data)
@@ -120,7 +121,6 @@
                     this.table.InsertOrReplace(entity).Wait();
                 }
             }
-
             Trace.TraceInformation("Stored SQL Server Data.");
 
             Trace.TraceInformation("Ran.");

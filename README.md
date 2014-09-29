@@ -2,7 +2,7 @@ APLHA Release
 ===========
 
 Synchronize Between SQL Server and Azure Table Storage;
-+ Version 1, moving data from SQL Server to Table Storage (In progress)
++ Version 1, moving data from SQL Server to Table Storage (Alpha)
 
 ## NuGet
 [Add via NuGet](https://www.nuget.org/packages/King.BTrak)
