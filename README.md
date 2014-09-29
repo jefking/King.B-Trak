@@ -1,4 +1,4 @@
-PRE-APLHA
+APLHA Release
 ===========
 
 Synchronize Between SQL Server and Azure Table Storage;

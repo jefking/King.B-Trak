@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.BTrak</id>
-        <version>0.0.4</version>
+        <version>0.0.5</version>
         <title>King.B-Trak</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
@@ -12,10 +12,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Synchronize data between SQL Server and Azure Table Storage.</description>
         <summary>Synchronize data between SQL Server and Azure Table Storage.</summary>
-      <releaseNotes>Pre-Alpha</releaseNotes>
+      <releaseNotes>Alpha Release</releaseNotes>
         <copyright>Jef King</copyright>
         <language>en-US</language>
-        <tags>King.BTrak Azure SQL Server SQL-Server Synchronize data sync table-storage tables</tags>
+        <tags>King.BTrak Azure SQL Server SQL-Server Synchronize data sync table-storage tables Data-Sync Table Azure-Storage Storage Account Storage-Account</tags>
     </metadata>
     <files>
       <file src="King.BTrak.Program\bin\Release\*.dll" target="content\King.BTrak\" />
