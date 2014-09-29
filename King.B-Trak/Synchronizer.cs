@@ -77,38 +77,16 @@
         {
             Trace.TraceInformation("Running...");
             //Injectable
-            var loader = new Loader<object>();
             var reader = new SchemaReader(this.config.SQLConenction);
             var writer = new TableStorageWriter(this.table);
+            var loader = new SqlDataLoader(this.database);
 
             Trace.TraceInformation("Loading Database Schema.");
             var schemas = reader.Load(SchemaTypes.Table).Result;
             Trace.TraceInformation("Loaded Database Schema.");
 
             Trace.TraceInformation("Loading SQL Server Data.");
-            var tables = new List<TableData>();
-            foreach (var schema in schemas.Values)
-            {
-                var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK)", schema.Preface, schema.Name);
-                Trace.TraceInformation(sql);
-
-                var cmd = this.database.CreateCommand();
-                cmd.CommandText = sql;
-                var adapter = new SqlDataAdapter(cmd);
-
-                var ds = new DataSet();
-                adapter.Fill(ds);
-                var table = ds.Tables[0];
-
-                var data = new TableData
-                {
-                    Data = loader.Dictionaries(table),
-                    Name = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),
-                };
-                tables.Add(data);
-                Trace.TraceInformation("Rows Read: {0}", data.Data.Count());
-            }
-            this.database.Close();
+            var tables = loader.Retrieve(schemas);
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
