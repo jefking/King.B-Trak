@@ -2,7 +2,10 @@
 {
     using King.Azure.Data;
     using King.Data.Sql.Reflection;
+    using King.Mapper.Data;
     using System;
+    using System.Linq;
+    using System.Data;
     using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Threading.Tasks;
@@ -42,6 +45,7 @@
             }
 
             this.config = config;
+            this.database = new SqlConnection(config.SQLConenction);
         }
         #endregion
 
@@ -54,11 +58,7 @@
         {
             Trace.TraceInformation("Initializing...");
 
-            using (this.database = new SqlConnection(config.SQLConenction))
-            {
-                //Make sure we can connect to the database
-                this.database.OpenAsync().Wait();
-            }
+            this.database.Open();
 
             this.table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
             this.table.CreateIfNotExists().Wait();
@@ -82,19 +82,31 @@
             Trace.TraceInformation("Loaded Database Schema.");
 
             Trace.TraceInformation("Loading SQL Server Data.");
-            //Start loading and mapping data for transfer
-            //Load data into dictionaries?
 
             foreach (var schema in schemas.Values)
             {
                 var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK)", schema.Preface, schema.Name);
-                //var loader = new DataLoader
                 Trace.TraceInformation(sql);
-            }
 
+                var cmd = this.database.CreateCommand();
+                cmd.CommandText = sql;
+                var adapter = new SqlDataAdapter(cmd);
+
+                var ds = new DataSet();
+                adapter.Fill(ds);
+                var table = ds.Tables[0];
+
+                var loader = new Loader<object>();
+                var data = loader.Dictionaries(table);
+
+                Trace.TraceInformation("Rows Read: {0}", data.Count());
+            }
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
+
+            //OH YEA, Ready to STORE DATA
+
             //Store data to Table storage.
             //How to store dictionary into Entity...
             Trace.TraceInformation("Stored SQL Server Data.");
