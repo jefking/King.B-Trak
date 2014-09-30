@@ -26,13 +26,13 @@
         #endregion
 
         #region Methods
-        public IList<TableData> Retrieve(IDictionary<int, IDefinition> schemas)
+        public IList<TableData> Retrieve(IEnumerable<IDefinition> schemas)
         {
             //Injectable
             var loader = new Loader<object>();
 
             var tables = new List<TableData>();
-            foreach (var schema in schemas.Values)
+            foreach (var schema in schemas)
             {
                 var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK)", schema.Preface, schema.Name);
                 Trace.TraceInformation(sql);
