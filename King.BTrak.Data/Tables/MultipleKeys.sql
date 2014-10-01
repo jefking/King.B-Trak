@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[MultipleKeys]
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    [Unique] UNIQUEIDENTIFIER NOT NULL DEFAULT newid(), 
+    [Comment] NVARCHAR(50) NOT NULL DEFAULT ''
+)

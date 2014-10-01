@@ -18,7 +18,7 @@
             get;
             set;
         }
-        public virtual string PrimaryKey
+        public virtual IEnumerable<string> PrimaryKeyColumns
         {
             get;
             set;

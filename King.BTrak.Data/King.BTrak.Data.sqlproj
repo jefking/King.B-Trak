@@ -23,6 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DacVersion>1.0.0.1</DacVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -63,5 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\TestDataOne.sql" />
+    <Build Include="Tables\MultipleKeys.sql" />
   </ItemGroup>
 </Project>

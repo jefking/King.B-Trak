@@ -3,6 +3,7 @@
     using King.Azure.Data;
     using King.BTrak.Models;
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -30,10 +31,31 @@
         {
             foreach (var table in tables)
             {
+
                 foreach (var entity in table.Data)
                 {
                     entity.Add(TableStorage.PartitionKey, table.Name);
-                    var rowKey = entity[table.PrimaryKey] ?? Guid.NewGuid();
+
+                    string rowKey = string.Empty;
+                    if (null != table.PrimaryKeyColumns && table.PrimaryKeyColumns.Any())
+                    {
+                        foreach (var col in table.PrimaryKeyColumns)
+                        {
+                            if (null == entity[col])
+                            {
+                                rowKey += "null";
+                            }
+                            else
+                            {
+                                rowKey += entity[col].ToString();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        rowKey = Guid.NewGuid().ToString();
+                    }
+
                     entity.Add(TableStorage.RowKey, rowKey);
                     await this.table.InsertOrReplace(entity);
                 }
