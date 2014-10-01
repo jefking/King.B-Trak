@@ -3,6 +3,7 @@
     using King.BTrak.Models;
     using King.Data.Sql.Reflection.Models;
     using King.Mapper.Data;
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
@@ -21,6 +22,11 @@
         #region Constructors
         public SqlDataLoader(SqlConnection database)
         {
+            if (null == database)
+            {
+                throw new ArgumentNullException("database");
+            }
+
             this.database = database;
         }
         #endregion
