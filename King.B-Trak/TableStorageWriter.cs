@@ -41,9 +41,10 @@
                     {
                         foreach (var col in table.PrimaryKeyColumns)
                         {
+                            rowKey += string.IsNullOrWhiteSpace(rowKey) ? string.Empty : "_";
                             if (null == entity[col])
                             {
-                                rowKey += "null";
+                                rowKey += "(null)";
                             }
                             else
                             {
