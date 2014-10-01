@@ -14,7 +14,7 @@
         /// <summary>
         /// Arguments
         /// </summary>
-        protected readonly IEnumerable<string> arguments;
+        protected readonly IReadOnlyList<string> arguments;
         #endregion
 
         #region Constructors
@@ -22,7 +22,7 @@
         /// Parameters
         /// </summary>
         /// <param name="arguments">Arguments</param>
-        public Parameters(IEnumerable<string> arguments)
+        public Parameters(IReadOnlyList<string> arguments)
         {
             this.arguments = arguments;
         }

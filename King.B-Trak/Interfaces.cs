@@ -38,4 +38,18 @@
         ISynchronizer Run();
     }
     #endregion
+
+#region ITableStorageWriter
+    public interface ITableStorageWriter
+    {
+
+    }
+#endregion
+
+#region ISqlDataLoader
+    public interface ISqlDataLoader
+    {
+
+    }
+#endregion
 }

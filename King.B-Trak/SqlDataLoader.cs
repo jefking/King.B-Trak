@@ -9,7 +9,7 @@
     using System.Diagnostics;
     using System.Linq;
 
-    public class SqlDataLoader
+    public class SqlDataLoader : ISqlDataLoader
     {
         #region Members
         /// <summary>

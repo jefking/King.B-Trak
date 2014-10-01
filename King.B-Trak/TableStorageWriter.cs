@@ -10,7 +10,7 @@
     /// <summary>
     /// Table Storage Writer
     /// </summary>
-    public class TableStorageWriter
+    public class TableStorageWriter : ITableStorageWriter
     {
         #region Members
         /// <summary>
