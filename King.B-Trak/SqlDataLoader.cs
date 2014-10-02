@@ -41,7 +41,12 @@
         #endregion
 
         #region Methods
-        public IList<TableData> Retrieve(IEnumerable<IDefinition> schemas)
+        /// <summary>
+        /// Retrieve Table Data
+        /// </summary>
+        /// <param name="schemas">Schemas</param>
+        /// <returns>Table Data</returns>
+        public virtual IList<TableData> Retrieve(IEnumerable<IDefinition> schemas)
         {
             var tables = new List<TableData>();
             foreach (var schema in schemas)

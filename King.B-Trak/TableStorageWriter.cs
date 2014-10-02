@@ -27,11 +27,15 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Store Table Data
+        /// </summary>
+        /// <param name="tables">Tables</param>
+        /// <returns>Task</returns>
         public virtual async Task Store(IList<TableData> tables)
         {
             foreach (var table in tables)
             {
-
                 foreach (var entity in table.Data)
                 {
                     entity.Add(TableStorage.PartitionKey, table.Name);
@@ -42,14 +46,7 @@
                         foreach (var col in table.PrimaryKeyColumns)
                         {
                             rowKey += string.IsNullOrWhiteSpace(rowKey) ? string.Empty : "_";
-                            if (null == entity[col])
-                            {
-                                rowKey += "(null)";
-                            }
-                            else
-                            {
-                                rowKey += entity[col].ToString();
-                            }
+                            rowKey += null == entity[col] ? "(null)" : entity[col].ToString();
                         }
                     }
                     else

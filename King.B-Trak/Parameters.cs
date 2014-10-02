@@ -30,9 +30,9 @@
 
         #region Methods
         /// <summary>
-        /// 
+        /// Process Configuration
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Configuration Values</returns>
         public virtual IConfigValues Process()
         {
             return new ConfigValues

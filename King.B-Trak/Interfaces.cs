@@ -5,15 +5,15 @@
 
     #region IParameters
     /// <summary>
-    /// 
+    /// Command Line Parameters
     /// </summary>
     public interface IParameters
     {
         #region Methods
         /// <summary>
-        /// 
+        /// Process Configuration
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Configuration Values</returns>
         IConfigValues Process();
         #endregion
     }
@@ -39,17 +39,17 @@
     }
     #endregion
 
-#region ITableStorageWriter
+    #region ITableStorageWriter
     public interface ITableStorageWriter
     {
 
     }
-#endregion
+    #endregion
 
-#region ISqlDataLoader
+    #region ISqlDataLoader
     public interface ISqlDataLoader
     {
 
     }
-#endregion
+    #endregion
 }
