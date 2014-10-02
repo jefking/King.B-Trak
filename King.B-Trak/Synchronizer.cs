@@ -69,7 +69,7 @@
         /// <summary>
         /// Innitialize Members
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Synchronizer</returns>
         public virtual ISynchronizer Initialize()
         {
             Trace.TraceInformation("Initializing...");
@@ -88,7 +88,7 @@
         /// <summary>
         /// Run Synchronization
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Synchronizer</returns>
         public virtual ISynchronizer Run()
         {
             Trace.TraceInformation("Loading Database Schema.");
