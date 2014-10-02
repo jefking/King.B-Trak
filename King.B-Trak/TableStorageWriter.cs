@@ -3,8 +3,8 @@
     using King.Azure.Data;
     using King.BTrak.Models;
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -20,8 +20,17 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Mockable Constructor
+        /// </summary>
+        /// <param name="table">Table Storage</param>
         public TableStorageWriter(ITableStorage table)
         {
+            if (null == table)
+            {
+                throw new ArgumentNullException("table");
+            }
+
             this.table = table;
         }
         #endregion
