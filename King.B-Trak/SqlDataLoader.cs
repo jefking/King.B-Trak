@@ -17,6 +17,11 @@
         /// SQL Connection
         /// </summary>
         protected SqlConnection database = null;
+
+        /// <summary>
+        /// Dynamic Loader
+        /// </summary>
+        protected readonly IDynamicLoader loader = new DynamicLoader();
         #endregion
 
         #region Constructors
@@ -34,9 +39,6 @@
         #region Methods
         public IList<TableData> Retrieve(IEnumerable<IDefinition> schemas)
         {
-            //Injectable
-            var loader = new Loader<object>();
-
             var tables = new List<TableData>();
             foreach (var schema in schemas)
             {
