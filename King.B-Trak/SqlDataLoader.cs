@@ -25,6 +25,10 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="database"></param>
         public SqlDataLoader(SqlConnection database)
         {
             if (null == database)
@@ -51,11 +55,10 @@
 
                 var ds = new DataSet();
                 adapter.Fill(ds);
-                var table = ds.Tables[0];
 
                 var data = new TableData
                 {
-                    Data = loader.Dictionaries(table),
+                    Data = loader.Dictionaries(ds),
                     Name = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),
                     PrimaryKeyColumns = from v in schema.Variables
                           where v.IsPrimaryKey
