@@ -23,7 +23,7 @@
                 var parameters = new Parameters(args);
                 var config = parameters.Process();
 
-                Trace.TraceInformation("{3}SQL Server Connection String: '{0}'{3}{3}Storage Account: '{1}'{3}Table Name: '{2}'{3}"
+                Trace.TraceInformation("SQL Server Connection String: '{0}'{3}{3}Storage Account: '{1}'{3}Table Name: '{2}'{3}"
                     , config.SQLConenction
                     , config.StorageAccountConnection
                     , config.StorageTableName
