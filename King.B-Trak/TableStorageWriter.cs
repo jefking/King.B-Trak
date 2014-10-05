@@ -43,16 +43,17 @@
         /// <returns>Task</returns>
         public virtual async Task Store(IEnumerable<TableData> tables)
         {
-            foreach (var table in tables)
+            foreach (var tableData in tables)
             {
-                foreach (var entity in table.Data)
+                var hasPk = null != tableData.PrimaryKeyColumns && tableData.PrimaryKeyColumns.Any();
+                foreach (var entity in tableData.Data)
                 {
-                    entity.Add(TableStorage.PartitionKey, table.Name);
+                    entity.Add(TableStorage.PartitionKey, tableData.Name);
 
                     var rowKey = string.Empty;
-                    if (null != table.PrimaryKeyColumns && table.PrimaryKeyColumns.Any())
+                    if (hasPk)
                     {
-                        foreach (var col in table.PrimaryKeyColumns)
+                        foreach (var col in tableData.PrimaryKeyColumns)
                         {
                             rowKey += string.IsNullOrWhiteSpace(rowKey) ? string.Empty : "_";
                             rowKey += null == entity[col] ? "(null)" : entity[col].ToString();
