@@ -92,15 +92,15 @@
         public virtual ISynchronizer Run()
         {
             Trace.TraceInformation("Loading Database Schema.");
-            var schemas = reader.Load(SchemaTypes.Table).Result;
+            var schemas = this.reader.Load(SchemaTypes.Table).Result;
             Trace.TraceInformation("Loaded Database Schema.");
 
             Trace.TraceInformation("Loading SQL Server Data.");
-            var tables = loader.Retrieve(schemas);
+            var tables = this.loader.Retrieve(schemas);
             Trace.TraceInformation("Loaded SQL Server Data.");
 
             Trace.TraceInformation("Storing SQL Server Data.");
-            writer.Store(tables).Wait();
+            this.writer.Store(tables).Wait();
             Trace.TraceInformation("Stored SQL Server Data.");
 
             return this;
