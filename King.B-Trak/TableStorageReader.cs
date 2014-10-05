@@ -16,5 +16,16 @@
         {
             return this.resources.TableNames();
         }
+
+        public IEnumerable<object> Retrieve(IEnumerable<string> schema)
+        {
+            foreach (var tableName in schema)
+            {
+                var table = new TableStorage(tableName, "");
+                //table.
+            }
+
+            return null;
+        }
     }
 }
