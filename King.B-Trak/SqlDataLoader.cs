@@ -49,12 +49,12 @@
         /// </summary>
         /// <param name="schemas">Schemas</param>
         /// <returns>Table Data</returns>
-        public virtual IList<TableData> Retrieve(IEnumerable<IDefinition> schemas)
+        public virtual IEnumerable<TableData> Retrieve(IEnumerable<IDefinition> schemas)
         {
             var tables = new List<TableData>();
             foreach (var schema in schemas)
             {
-                var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK)", schema.Preface, schema.Name);
+                var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK);", schema.Preface, schema.Name);
                 Trace.TraceInformation(sql);
 
                 var cmd = this.database.CreateCommand();
@@ -66,7 +66,7 @@
 
                 var data = new TableData
                 {
-                    Data = loader.Dictionaries(ds),
+                    Data = this.loader.Dictionaries(ds),
                     Name = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),
                     PrimaryKeyColumns = from v in schema.Variables
                           where v.IsPrimaryKey

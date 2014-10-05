@@ -41,7 +41,7 @@
         /// </summary>
         /// <param name="tables">Tables</param>
         /// <returns>Task</returns>
-        public virtual async Task Store(IList<TableData> tables)
+        public virtual async Task Store(IEnumerable<TableData> tables)
         {
             foreach (var table in tables)
             {
@@ -49,7 +49,7 @@
                 {
                     entity.Add(TableStorage.PartitionKey, table.Name);
 
-                    string rowKey = string.Empty;
+                    var rowKey = string.Empty;
                     if (null != table.PrimaryKeyColumns && table.PrimaryKeyColumns.Any())
                     {
                         foreach (var col in table.PrimaryKeyColumns)

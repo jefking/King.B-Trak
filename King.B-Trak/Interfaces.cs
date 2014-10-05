@@ -47,7 +47,7 @@
     public interface ITableStorageWriter
     {
         #region Methods
-        Task Store(IList<TableData> tables);
+        Task Store(IEnumerable<TableData> tables);
         #endregion
     }
     #endregion
@@ -56,7 +56,7 @@
     public interface ISqlDataLoader
     {
         #region Methods
-        IList<TableData> Retrieve(IEnumerable<IDefinition> schemas);
+        IEnumerable<TableData> Retrieve(IEnumerable<IDefinition> schemas);
         #endregion
     }
     #endregion
