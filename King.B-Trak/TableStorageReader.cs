@@ -1,12 +1,20 @@
 ﻿namespace King.BTrak
 {
-    using System;
+    using King.Azure.Data;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class TableStorageReader
     {
+        protected readonly IAzureStorageResources resources = null;
+
+        public TableStorageReader(IAzureStorageResources resources)
+        {
+            this.resources = resources;
+        }
+
+        public IEnumerable<string> Load()
+        {
+            return this.resources.TableNames();
+        }
     }
 }

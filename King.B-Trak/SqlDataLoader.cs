@@ -59,8 +59,8 @@
 
                 var cmd = this.database.CreateCommand();
                 cmd.CommandText = sql;
-                var adapter = new SqlDataAdapter(cmd);
 
+                var adapter = new SqlDataAdapter(cmd);
                 var ds = new DataSet();
                 adapter.Fill(ds);
 
