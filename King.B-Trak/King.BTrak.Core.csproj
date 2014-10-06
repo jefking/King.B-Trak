@@ -43,9 +43,9 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="King.Azure, Version=1.0.0.19, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="King.Azure, Version=1.0.1.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\King.Azure.1.0.18\lib\net451\King.Azure.dll</HintPath>
+      <HintPath>..\packages\King.Azure.1.1.2\lib\net451\King.Azure.dll</HintPath>
     </Reference>
     <Reference Include="King.Data.Sql.Reflection, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,6 +104,7 @@
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

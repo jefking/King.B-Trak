@@ -91,17 +91,21 @@
         /// <returns>Synchronizer</returns>
         public virtual ISynchronizer Run()
         {
-            Trace.TraceInformation("Loading Database Schema.");
-            var schemas = this.reader.Load(SchemaTypes.Table).Result;
-            Trace.TraceInformation("Loaded Database Schema.");
+            var operation = "Table";//"SQL Server"
+            Trace.TraceInformation("Loading {0} Schema.", operation);
+            //var schemas = this.reader.Load(SchemaTypes.Table).Result;
+            var tableStorageReader = new TableStorageReader(new AzureStorageResources(""));
+            var schemas = tableStorageReader.Load();
+            Trace.TraceInformation("Loaded {0} Schema.", operation);
 
-            Trace.TraceInformation("Loading SQL Server Data.");
-            var tables = this.loader.Retrieve(schemas);
-            Trace.TraceInformation("Loaded SQL Server Data.");
+            Trace.TraceInformation("Loading {0} Data.", operation);
+            //var tables = this.loader.Retrieve(schemas);
+            var data = tableStorageReader.Retrieve(schemas).Result;
+            Trace.TraceInformation("Loaded {0} Data.", operation);
 
-            Trace.TraceInformation("Storing SQL Server Data.");
-            this.writer.Store(tables).Wait();
-            Trace.TraceInformation("Stored SQL Server Data.");
+            Trace.TraceInformation("Storing {0} Data.", operation);
+            //this.writer.Store(tables).Wait();
+            Trace.TraceInformation("Stored {0} Data.", operation);
 
             return this;
         }

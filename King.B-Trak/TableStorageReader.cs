@@ -1,7 +1,9 @@
 ﻿namespace King.BTrak
 {
     using King.Azure.Data;
+    using Microsoft.WindowsAzure.Storage.Table;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public class TableStorageReader
     {
@@ -12,20 +14,21 @@
             this.resources = resources;
         }
 
-        public IEnumerable<string> Load()
+        public IEnumerable<ITableStorage> Load()
         {
-            return this.resources.TableNames();
+            return this.resources.Tables();
         }
 
-        public IEnumerable<object> Retrieve(IEnumerable<string> schema)
+        public async Task<IEnumerable<IDictionary<string, object>>> Retrieve(IEnumerable<ITableStorage> tables)
         {
-            foreach (var tableName in schema)
+            var data = new List<IDictionary<string, object>>();
+            foreach (var table in tables)
             {
-                var table = new TableStorage(tableName, "");
-                //table.
+                var add = await table.Query(new TableQuery());
+                data.AddRange(add);
             }
 
-            return null;
+            return data;
         }
     }
 }
