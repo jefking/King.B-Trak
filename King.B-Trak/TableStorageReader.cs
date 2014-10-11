@@ -25,6 +25,11 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="resources"></param>
+        /// <param name="tableName"></param>
         public TableStorageReader(IAzureStorageResources resources, string tableName)
         {
             this.resources = resources;
@@ -33,6 +38,10 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ITableStorage> Load()
         {
             return from t in this.resources.Tables()
@@ -40,6 +49,11 @@
                    select t;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<SqlData>> Retrieve(IEnumerable<ITableStorage> tables)
         {
             var datas = new List<SqlData>();

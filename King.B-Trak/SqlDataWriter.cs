@@ -41,6 +41,12 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="reader"></param>
+        /// <param name="connectionString"></param>
         public SqlDataWriter(string tableName, ISchemaReader reader, string connectionString)
         {
             this.tableName = tableName;
@@ -52,6 +58,10 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public virtual async Task<bool> CreateTable()
         {
             var exists = (from t in await this.reader.Load(SchemaTypes.Table)
@@ -71,6 +81,10 @@
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public virtual async Task<bool> CreateSproc()
         {
             var exists = (from t in await this.reader.Load(SchemaTypes.StoredProcedure)
@@ -92,6 +106,11 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
         public virtual async Task Store(IEnumerable<SqlData> datas)
         {
             var created = await this.CreateTable();

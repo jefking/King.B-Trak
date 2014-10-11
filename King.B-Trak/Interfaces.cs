@@ -45,18 +45,34 @@
     #endregion
 
     #region ITableStorageWriter
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ITableStorageWriter
     {
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <returns></returns>
         Task Store(IEnumerable<TableData> tables);
         #endregion
     }
     #endregion
 
     #region ISqlDataLoader
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ISqlDataLoader
     {
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="schemas"></param>
+        /// <returns></returns>
         IEnumerable<TableData> Retrieve(IEnumerable<IDefinition> schemas);
         #endregion
     }
@@ -64,12 +80,34 @@
 
     public interface ITableStorageReader
     {
+        #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         IEnumerable<ITableStorage> Load();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <returns></returns>
         Task<IEnumerable<SqlData>> Retrieve(IEnumerable<ITableStorage> tables);
+        #endregion
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ISqlDataWriter
     {
+        #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
         Task Store(IEnumerable<SqlData> datas);
+        #endregion
     }
 }
