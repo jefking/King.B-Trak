@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[TableData]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(), 
+    [TableName] NVARCHAR(255) NOT NULL, 
+    [Data] XML NULL, 
+    [PartitionKey] NVARCHAR(255) NOT NULL, 
+    [RowKey] NVARCHAR(255) NOT NULL, 
+    [ETag] NCHAR(10) NOT NULL, 
+    [Timestamp] DATETIME NOT NULL, 
+    [SynchronizedOn] DATETIME NOT NULL DEFAULT GETUTCDATE()
+)

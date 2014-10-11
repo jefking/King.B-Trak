@@ -96,6 +96,7 @@
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlDataLoader.cs" />
+    <Compile Include="SqlDataWriter.cs" />
     <Compile Include="Synchronizer.cs" />
     <Compile Include="TableStorageReader.cs" />
     <Compile Include="TableStorageWriter.cs" />

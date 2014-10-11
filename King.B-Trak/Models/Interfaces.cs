@@ -3,7 +3,7 @@
 
     #region IConfigValues
     /// <summary>
-    /// 
+    /// Configuration Values
     /// </summary>
     public interface IConfigValues
     {
@@ -25,9 +25,17 @@
         }
 
         /// <summary>
-        /// 
+        /// Storage Table Name
         /// </summary>
         string StorageTableName
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Storage Table Name
+        /// </summary>
+        string SqlTableName
         {
             get;
         }
