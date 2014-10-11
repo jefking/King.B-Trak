@@ -26,8 +26,20 @@
                                         [Data] XML NULL, 
                                         PRIMARY KEY ([TableName], [RowKey], [PartitionKey])
                                     );";
+        public const string sproc = @"CREATE TABLE [dbo].[{0}]
+                                    (
+	                                    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(), 
+                                        [TableName] NVARCHAR(255) NOT NULL, 
+                                        [PartitionKey] NVARCHAR(255) NOT NULL, 
+                                        [RowKey] NVARCHAR(255) NOT NULL, 
+                                        [ETag] NCHAR(255) NOT NULL, 
+                                        [Timestamp] DATETIME NOT NULL, 
+                                        [SynchronizedOn] DATETIME NOT NULL DEFAULT GETUTCDATE(),
+                                        [Data] XML NULL, 
+                                        PRIMARY KEY ([TableName], [RowKey], [PartitionKey])
+                                    );";
 
-        private readonly string tableName = null;
+        protected readonly string tableName = null;
 
         /// <summary>
         /// Schema Reader
@@ -46,7 +58,7 @@
             this.database = new SqlConnection(connectionString);
         }
 
-        public async Task<bool> CreateTable()
+        public virtual async Task<bool> CreateTable()
         {
             await this.database.OpenAsync();
             var exists = (from t in await this.reader.Load(SchemaTypes.Table)
@@ -65,7 +77,7 @@
             return true;
         }
 
-        public async Task Store(IEnumerable<SqlData> datas)
+        public virtual async Task Store(IEnumerable<SqlData> datas)
         {
             var created = await this.CreateTable();
             if (created)
