@@ -59,8 +59,10 @@
     <Folder Include="Properties" />
     <Folder Include="btrak" />
     <Folder Include="btrak\Tables" />
+    <Folder Include="btrak\Sprocs" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="btrak\Tables\TableData.sql" />
+    <Build Include="btrak\Sprocs\SaveTableData.sql" />
   </ItemGroup>
 </Project>
