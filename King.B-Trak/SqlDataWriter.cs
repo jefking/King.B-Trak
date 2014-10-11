@@ -11,7 +11,7 @@
 
     public class SqlDataWriter
     {
-        public const string table = @"CREATE TABLE [btrak].[{0}]
+        public const string table = @"CREATE TABLE [dbo].[{0}]
                                     (
 	                                    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(), 
                                         [TableName] NVARCHAR(255) NOT NULL, 
@@ -36,13 +36,16 @@
         /// </summary>
         protected readonly SqlConnection database = null;
 
-        public SqlDataWriter(IConfigValues config)
+        public SqlDataWriter(string tableName, SchemaReader reader, string connectionString)
         {
-            this.tableName = config.SqlTableName;
+            this.tableName = tableName;
+            this.reader = reader;
+            this.database = new SqlConnection(connectionString);
         }
 
         public async Task<bool> CreateTable()
         {
+            await this.database.OpenAsync();
             var exists = (from t in await this.reader.Load(SchemaTypes.Table)
                            where t.Name == this.tableName
                            select true).FirstOrDefault();
@@ -56,10 +59,10 @@
                 return 1 == await cmd.ExecuteNonQueryAsync();
             }
 
-            return false;
+            return true;
         }
 
-        public async Task Store(IEnumerable<IDictionary<string, object>> datas)
+        public async Task Store(IEnumerable<SqlData> datas)
         {
             var created = await this.CreateTable();
             if (created)

@@ -42,6 +42,21 @@
         /// Sql Data Loader
         /// </summary>
         protected readonly SqlDataLoader loader = null;
+
+        /// <summary>
+        /// Azure Storage Resources
+        /// </summary>
+        protected readonly IAzureStorageResources storageResources = null;
+
+        /// <summary>
+        /// Table Storage Reader
+        /// </summary>
+        protected readonly TableStorageReader tableStorageReader = null;
+
+        /// <summary>
+        /// SQL Data Writer
+        /// </summary>
+        protected readonly SqlDataWriter sqlDataWriter = null;
         #endregion
 
         #region Constructors
@@ -62,6 +77,9 @@
             this.reader = new SchemaReader(this.config.SqlConenction);
             this.writer = new TableStorageWriter(this.table);
             this.loader = new SqlDataLoader(this.database);
+            this.storageResources = new AzureStorageResources(config.StorageAccountConnection);
+            this.tableStorageReader = new TableStorageReader(this.storageResources, config.StorageTableName);
+            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, this.reader, config.SqlConenction);
         }
         #endregion
 
@@ -94,7 +112,6 @@
             var operation = "Table";//"SQL Server"
             Trace.TraceInformation("Loading {0} Schema.", operation);
             //var schemas = this.reader.Load(SchemaTypes.Table).Result;
-            var tableStorageReader = new TableStorageReader(new AzureStorageResources(""));
             var schemas = tableStorageReader.Load();
             Trace.TraceInformation("Loaded {0} Schema.", operation);
 
@@ -105,6 +122,7 @@
 
             Trace.TraceInformation("Storing {0} Data.", operation);
             //this.writer.Store(tables).Wait();
+            this.sqlDataWriter.Store(data).Wait();
             Trace.TraceInformation("Stored {0} Data.", operation);
 
             return this;
