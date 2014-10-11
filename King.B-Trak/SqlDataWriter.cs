@@ -2,10 +2,11 @@
 {
     using King.BTrak.Models;
     using King.Data.Sql.Reflection;
-    using System;
+    using King.Mapper.Data;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Diagnostics;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     public class SqlDataWriter
@@ -30,6 +31,16 @@
         /// </summary>
         protected readonly SchemaReader reader = null;
 
+        /// <summary>
+        /// SQL Connection
+        /// </summary>
+        protected readonly SqlConnection database = null;
+
+        /// <summary>
+        /// Dynamic Loader
+        /// </summary>
+        protected readonly IDynamicLoader loader = new DynamicLoader();
+
         public SqlDataWriter(IConfigValues config)
         {
             this.tableName = config.SqlTableName;
@@ -42,16 +53,24 @@
                            select true).FirstOrDefault();
             if (!exists)
             {
-                var tableStatement = string.Format(table, this.tableName);
+                Trace.TraceInformation("Creating table to load data into: '{0}'.", this.tableName);
+
+                var statement = string.Format(table, this.tableName);
+                var cmd = this.database.CreateCommand();
+                cmd.CommandText = statement;
+                await cmd.ExecuteNonQueryAsync();
                 return true;
             }
 
             return false;
         }
 
-        public void Store(IDictionary<string, object> data)
+        public void Store(IEnumerable<IDictionary<string, object>> datas)
         {
+            foreach (var data in datas)
+            {
 
+            }
         }
     }
 }

@@ -92,6 +92,7 @@
     <Compile Include="Interfaces.cs" />
     <Compile Include="Models\ConfigValues.cs" />
     <Compile Include="Models\Interfaces.cs" />
+    <Compile Include="Models\SqlTable.cs" />
     <Compile Include="Models\TableData.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

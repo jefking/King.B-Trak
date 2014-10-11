@@ -19,7 +19,7 @@
         /// <summary>
         /// SQL Connection
         /// </summary>
-        protected SqlConnection database = null;
+        protected readonly SqlConnection database = null;
 
         /// <summary>
         /// Dynamic Loader
