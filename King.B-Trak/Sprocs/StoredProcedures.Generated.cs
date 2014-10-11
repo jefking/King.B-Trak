@@ -71,7 +71,7 @@ namespace King.Mapper.Generated.Sql
         /// Gets or sets the parameter value
         /// </summary>
 		[DataMapper("@ETag", DbType.String)]
-		public virtual char ETag
+		public virtual string ETag
 		{
 			get;
 			set;

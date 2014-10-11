@@ -3,7 +3,7 @@
     , @TableName NVARCHAR(255) = NULL 
     , @PartitionKey NVARCHAR(255) = NULL
     , @RowKey NVARCHAR(255) = NULL
-    , @ETag NCHAR(255) = NULL 
+    , @ETag NVARCHAR(255) = NULL 
     , @Timestamp DATETIME = NULL
     , @Data XML = NULL
 AS

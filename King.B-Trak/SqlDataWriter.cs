@@ -1,16 +1,17 @@
 ﻿namespace King.BTrak
 {
     using King.Azure.Data;
-    using King.BTrak.Models;
-    using King.Data.Sql.Reflection;
-    using King.Mapper;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+using King.BTrak.Models;
+using King.Data.Sql.Reflection;
+using King.Mapper;
+using King.Mapper.Data;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
     public class SqlDataWriter
     {
@@ -21,7 +22,7 @@
                                         [TableName] NVARCHAR(255) NOT NULL, 
                                         [PartitionKey] NVARCHAR(255) NOT NULL, 
                                         [RowKey] NVARCHAR(255) NOT NULL, 
-                                        [ETag] NCHAR(255) NOT NULL, 
+                                        [ETag] NVARCHAR(255) NOT NULL, 
                                         [Timestamp] DATETIME NOT NULL, 
                                         [SynchronizedOn] DATETIME NOT NULL DEFAULT GETUTCDATE(),
                                         [Data] XML NULL, 
@@ -32,7 +33,7 @@
                                         , @TableName NVARCHAR(255) = NULL 
                                         , @PartitionKey NVARCHAR(255) = NULL
                                         , @RowKey NVARCHAR(255) = NULL
-                                        , @ETag NCHAR(255) = NULL 
+                                        , @ETag NVARCHAR(255) = NULL 
                                         , @Timestamp DATETIME = NULL
                                         , @Data XML = NULL
                                     AS
@@ -100,16 +101,19 @@
         /// </summary>
         protected readonly SqlConnection database = null;
 
+        protected readonly IExecutor executor = null;
+
         public SqlDataWriter(string tableName, SchemaReader reader, string connectionString)
         {
             this.tableName = tableName;
             this.reader = reader;
             this.database = new SqlConnection(connectionString);
+            this.executor = new Executor(this.database);
+            this.database.Open();
         }
 
         public virtual async Task<bool> CreateTable()
         {
-            await this.database.OpenAsync();
             var exists = (from t in await this.reader.Load(SchemaTypes.Table)
                           where t.Name == this.tableName
                           && t.Preface == Schema
@@ -121,7 +125,7 @@
                 var statement = string.Format(table, Schema, this.tableName);
                 var cmd = this.database.CreateCommand();
                 cmd.CommandText = statement;
-                return 1 == await cmd.ExecuteNonQueryAsync();
+                return await cmd.ExecuteNonQueryAsync() == -1;
             }
 
             return true;
@@ -140,7 +144,7 @@
                 var statement = string.Format(sproc, Schema, this.tableName);
                 var cmd = this.database.CreateCommand();
                 cmd.CommandText = statement;
-                return 1 == await cmd.ExecuteNonQueryAsync();
+                return await cmd.ExecuteNonQueryAsync() == -1;
             }
 
             return true;
@@ -158,9 +162,9 @@
                     {
                         foreach (var row in data.Rows)
                         {
-                            var tblMap = row.Map<SqlTable>();
-                            tblMap.TableName = data.TableName;
-                            tblMap.Id = Guid.NewGuid();
+                            var sproc = row.Map<SqlTable>();
+                            sproc.TableName = data.TableName;
+                            sproc.Id = Guid.NewGuid();
                             var keys = from k in row.Keys
                                        where k != TableStorage.ETag
                                            && k != TableStorage.PartitionKey
@@ -172,8 +176,10 @@
                             {
                                 values.AppendFormat("<{0}>{1}<{0}>", k, row[k]);
                             }
-                            const string xmlWrapper = "<data>{0}</data>";
-                            tblMap.Data = string.Format(xmlWrapper, values);
+
+                            sproc.Data = string.Format("<data>{0}</data>", values);
+
+                            await this.executor.NonQuery(sproc);
                         }
                     }
                 }
