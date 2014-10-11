@@ -1,9 +1,19 @@
 ﻿namespace King.BTrak
 {
+    /// <summary>
+    /// SQL Statements
+    /// </summary>
     public struct SqlStatements
     {
         #region Members
+        /// <summary>
+        /// Schema
+        /// </summary>
         public const string Schema = "dbo";
+
+        /// <summary>
+        /// Create Table Statement
+        /// </summary>
         public const string CreateTable = @"CREATE TABLE [{0}].[{1}]
                                     (
 	                                    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(), 
@@ -16,6 +26,10 @@
                                         [Data] XML NULL, 
                                         PRIMARY KEY ([TableName], [RowKey], [PartitionKey])
                                     );";
+
+        /// <summary>
+        /// Create Stored Procedure Statement
+        /// </summary>
         public const string CreateStoredProcedure = @"CREATE PROCEDURE [{0}].[SaveTableData]
 	                                    @Id UNIQUEIDENTIFIER = NULL
                                         , @TableName NVARCHAR(255) = NULL 

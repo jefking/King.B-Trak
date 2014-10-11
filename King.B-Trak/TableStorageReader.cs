@@ -7,17 +7,25 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Table Storage Reader
+    /// </summary>
     public class TableStorageReader
     {
+        #region Members
         protected readonly IAzureStorageResources resources = null;
         protected readonly string tableName = null;
+        #endregion
 
+        #region Constructors
         public TableStorageReader(IAzureStorageResources resources, string tableName)
         {
             this.resources = resources;
             this.tableName = tableName;
         }
+        #endregion
 
+        #region Methods
         public IEnumerable<ITableStorage> Load()
         {
             return from t in this.resources.Tables()
@@ -41,5 +49,6 @@
 
             return datas;
         }
+        #endregion
     }
 }

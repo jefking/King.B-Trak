@@ -13,8 +13,12 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// SQL Data Writer
+    /// </summary>
     public class SqlDataWriter
     {
+        #region Members
         /// <summary>
         /// Table Name
         /// </summary>
@@ -30,8 +34,13 @@
         /// </summary>
         protected readonly SqlConnection database = null;
 
+        /// <summary>
+        /// Executor
+        /// </summary>
         protected readonly IExecutor executor = null;
+        #endregion
 
+        #region Constructors
         public SqlDataWriter(string tableName, SchemaReader reader, string connectionString)
         {
             this.tableName = tableName;
@@ -40,7 +49,9 @@
             this.executor = new Executor(this.database);
             this.database.Open();
         }
+        #endregion
 
+        #region Methods
         public virtual async Task<bool> CreateTable()
         {
             var exists = (from t in await this.reader.Load(SchemaTypes.Table)
@@ -78,7 +89,9 @@
 
             return true;
         }
+        #endregion
 
+        #region Methods
         public virtual async Task Store(IEnumerable<SqlData> datas)
         {
             var created = await this.CreateTable();
@@ -122,5 +135,6 @@
                 Trace.TraceError("Table is not created, no data can be loaded.");
             }
         }
+        #endregion
     }
 }
