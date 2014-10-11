@@ -11,11 +11,15 @@ Synchronize Between SQL Server and Azure Table Storage;
 PM> Install-Package King.BTrak
 ```
 Currently:
-Move Data from SQL Server to Table Storage
+### Move Data from SQL Server to Table Storage
+```
 PM> Install-Package King.BTrak -Version 0.1.1
-Move Data from Table Storage to SQL Server
+```
+### Move Data from Table Storage to SQL Server
+```
 PM> Install-Package King.BTrak-Version 0.2.0
-These will be amalgamated for the BETA release soon!
+```
+### These will be amalgamated for the BETA release soon!
 
 ## Getting Started
 * Clone the repository
