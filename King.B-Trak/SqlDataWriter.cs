@@ -2,7 +2,7 @@
 {
     using King.BTrak.Models;
     using King.Data.Sql.Reflection;
-    using King.Mapper.Data;
+    using King.Mapper;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Diagnostics;
@@ -66,7 +66,7 @@
             {
                 foreach (var data in datas)
                 {
-
+                    var tblMap = data.Map<SqlTable>();
                 }
             }
             else

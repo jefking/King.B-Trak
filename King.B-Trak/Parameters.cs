@@ -37,8 +37,8 @@
         {
             return new ConfigValues
             {
-                SqlConenction = this.arguments.ElementAt(0),
-                StorageAccountConnection = this.arguments.ElementAt(1),
+                SqlConenction = this.arguments.ElementAt(1),
+                StorageAccountConnection = this.arguments.ElementAt(0),
                 StorageTableName = ConfigurationManager.AppSettings["StorageTable"],
                 SqlTableName = ConfigurationManager.AppSettings["SqlTable"],
             };
