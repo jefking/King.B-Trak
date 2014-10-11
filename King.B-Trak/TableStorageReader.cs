@@ -1,11 +1,11 @@
 ﻿namespace King.BTrak
 {
     using King.Azure.Data;
-using King.BTrak.Models;
-using Microsoft.WindowsAzure.Storage.Table;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+    using King.BTrak.Models;
+    using Microsoft.WindowsAzure.Storage.Table;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class TableStorageReader
     {

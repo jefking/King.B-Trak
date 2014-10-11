@@ -12,37 +12,27 @@ BEGIN
 	MERGE INTO [dbo].[TableData] [table]
 	USING
 	(
-		SELECT @Id
-		, @TableName
-		, @PartitionKey
-		, @RowKey
-		, @ETag
-		, @Timestamp
-		, @Data
-		, GETUTCDATE()
-	) AS [Data]
-	(
-		[Id]
-		, [TableName]
-		, [PartitionKey]
-		, [RowKey]
-		, [ETag]
-		, [Timestamp]
-		, [Data]
-		, [SynchronizedOn]
-	)
+		SELECT @Id AS [Id]
+		, @TableName AS [TableName]
+		, @PartitionKey AS [PartitionKey]
+		, @RowKey AS [RowKey]
+		, @ETag AS [ETag]
+		, @Timestamp AS [Timestamp]
+		, @Data AS [Data]
+		, GETUTCDATE() AS [SynchronizedOn]
+	) AS [source]
 	ON
 	(
-		[table].[TableName] = [data].[TableName]
-		AND [table].[PartitionKey] = [data].[PartitionKey]
-		AND [table].[RowKey] = [data].[RowKey]
+		[table].[TableName] = [source].[TableName]
+		AND [table].[PartitionKey] = [source].[PartitionKey]
+		AND [table].[RowKey] = [source].[RowKey]
 	)
 	WHEN MATCHED THEN
-		UPDATE SET [table].[Id] = [data].[Id]
-			, [table].[ETag] = [data].[ETag]
-			, [table].[Timestamp] = [data].[Timestamp]
-			, [table].[SynchronizedOn] = [data].[SynchronizedOn]
-			, [table].[Data] = [data].[Data]
+		UPDATE SET [table].[Id] = [source].[Id]
+			, [table].[ETag] = [source].[ETag]
+			, [table].[Timestamp] = [source].[Timestamp]
+			, [table].[SynchronizedOn] = [source].[SynchronizedOn]
+			, [table].[Data] = [source].[Data]
 	WHEN NOT MATCHED THEN
 		INSERT
 		(
@@ -57,14 +47,14 @@ BEGIN
 		)
 		VALUES
 		(
-			[data].[Id]
-			, [data].[TableName]
-			, [data].[PartitionKey]
-			, [data].[RowKey]
-			, [data].[ETag]
-			, [data].[Timestamp]
-			, [data].[SynchronizedOn]
-			, [data].[Data]
+			[source].[Id]
+			, [source].[TableName]
+			, [source].[PartitionKey]
+			, [source].[RowKey]
+			, [source].[ETag]
+			, [source].[Timestamp]
+			, [source].[SynchronizedOn]
+			, [source].[Data]
 		);
 
 END

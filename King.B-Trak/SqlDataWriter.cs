@@ -14,7 +14,8 @@
 
     public class SqlDataWriter
     {
-        public const string table = @"CREATE TABLE [dbo].[{0}]
+        public const string Schema = "dbo";
+        public const string table = @"CREATE TABLE [{0}].[{1}]
                                     (
 	                                    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(), 
                                         [TableName] NVARCHAR(255) NOT NULL, 
@@ -26,18 +27,66 @@
                                         [Data] XML NULL, 
                                         PRIMARY KEY ([TableName], [RowKey], [PartitionKey])
                                     );";
-        public const string sproc = @"CREATE TABLE [dbo].[{0}]
-                                    (
-	                                    [Id] UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(), 
-                                        [TableName] NVARCHAR(255) NOT NULL, 
-                                        [PartitionKey] NVARCHAR(255) NOT NULL, 
-                                        [RowKey] NVARCHAR(255) NOT NULL, 
-                                        [ETag] NCHAR(255) NOT NULL, 
-                                        [Timestamp] DATETIME NOT NULL, 
-                                        [SynchronizedOn] DATETIME NOT NULL DEFAULT GETUTCDATE(),
-                                        [Data] XML NULL, 
-                                        PRIMARY KEY ([TableName], [RowKey], [PartitionKey])
-                                    );";
+        public const string sproc = @"CREATE PROCEDURE [{0}].[SaveTableData]
+	                                    @Id UNIQUEIDENTIFIER = NULL
+                                        , @TableName NVARCHAR(255) = NULL 
+                                        , @PartitionKey NVARCHAR(255) = NULL
+                                        , @RowKey NVARCHAR(255) = NULL
+                                        , @ETag NCHAR(255) = NULL 
+                                        , @Timestamp DATETIME = NULL
+                                        , @Data XML = NULL
+                                    AS
+                                    BEGIN
+
+	                                    MERGE INTO [{0}].[{1}] [table]
+	                                    USING
+	                                    (
+		                                    SELECT @Id AS [Id]
+		                                    , @TableName AS [TableName]
+		                                    , @PartitionKey AS [PartitionKey]
+		                                    , @RowKey AS [RowKey]
+		                                    , @ETag AS [ETag]
+		                                    , @Timestamp AS [Timestamp]
+		                                    , @Data AS [Data]
+		                                    , GETUTCDATE() AS [SynchronizedOn]
+	                                    ) AS [source]
+	                                    ON
+	                                    (
+		                                    [table].[TableName] = [source].[TableName]
+		                                    AND [table].[PartitionKey] = [source].[PartitionKey]
+		                                    AND [table].[RowKey] = [source].[RowKey]
+	                                    )
+	                                    WHEN MATCHED THEN
+		                                    UPDATE SET [table].[Id] = [source].[Id]
+			                                    , [table].[ETag] = [source].[ETag]
+			                                    , [table].[Timestamp] = [source].[Timestamp]
+			                                    , [table].[SynchronizedOn] = [source].[SynchronizedOn]
+			                                    , [table].[Data] = [source].[Data]
+	                                    WHEN NOT MATCHED THEN
+		                                    INSERT
+		                                    (
+			                                    [Id]
+			                                    , [TableName]
+			                                    , [PartitionKey]
+			                                    , [RowKey]
+			                                    , [ETag]
+			                                    , [Timestamp]
+			                                    , [SynchronizedOn]
+			                                    , [Data]
+		                                    )
+		                                    VALUES
+		                                    (
+			                                    [source].[Id]
+			                                    , [source].[TableName]
+			                                    , [source].[PartitionKey]
+			                                    , [source].[RowKey]
+			                                    , [source].[ETag]
+			                                    , [source].[Timestamp]
+			                                    , [source].[SynchronizedOn]
+			                                    , [source].[Data]
+		                                    );
+
+                                    END";
 
         protected readonly string tableName = null;
 
@@ -62,13 +111,33 @@
         {
             await this.database.OpenAsync();
             var exists = (from t in await this.reader.Load(SchemaTypes.Table)
-                           where t.Name == this.tableName
-                           select true).FirstOrDefault();
+                          where t.Name == this.tableName
+                          && t.Preface == Schema
+                          select true).FirstOrDefault();
             if (!exists)
             {
                 Trace.TraceInformation("Creating table to load data into: '{0}'.", this.tableName);
 
-                var statement = string.Format(table, this.tableName);
+                var statement = string.Format(table, Schema, this.tableName);
+                var cmd = this.database.CreateCommand();
+                cmd.CommandText = statement;
+                return 1 == await cmd.ExecuteNonQueryAsync();
+            }
+
+            return true;
+        }
+
+        public virtual async Task<bool> CreateSproc()
+        {
+            var exists = (from t in await this.reader.Load(SchemaTypes.StoredProcedure)
+                          where t.Name == "SaveTableData"
+                           && t.Preface == Schema
+                          select true).FirstOrDefault();
+            if (!exists)
+            {
+                Trace.TraceInformation("Creating stored procedure to load data into table: '{0}'.", this.tableName);
+
+                var statement = string.Format(sproc, Schema, this.tableName);
                 var cmd = this.database.CreateCommand();
                 cmd.CommandText = statement;
                 return 1 == await cmd.ExecuteNonQueryAsync();
@@ -82,32 +151,40 @@
             var created = await this.CreateTable();
             if (created)
             {
-                foreach (var data in datas)
+                created = await this.CreateSproc();
+                if (created)
                 {
-                    foreach (var row in data.Rows)
+                    foreach (var data in datas)
                     {
-                        var tblMap = row.Map<SqlTable>();
-                        tblMap.TableName = data.TableName;
-                        tblMap.Id = Guid.NewGuid();
-                        var keys = from k in row.Keys
-                                   where k != TableStorage.ETag
-                                       && k != TableStorage.PartitionKey
-                                       && k != TableStorage.RowKey
-                                       && k != TableStorage.Timestamp
-                                   select k;
-                        var values = new StringBuilder();
-                        foreach (var k in keys)
+                        foreach (var row in data.Rows)
                         {
-                            values.AppendFormat("<{0}>{1}<{0}>", k, row[k]);
+                            var tblMap = row.Map<SqlTable>();
+                            tblMap.TableName = data.TableName;
+                            tblMap.Id = Guid.NewGuid();
+                            var keys = from k in row.Keys
+                                       where k != TableStorage.ETag
+                                           && k != TableStorage.PartitionKey
+                                           && k != TableStorage.RowKey
+                                           && k != TableStorage.Timestamp
+                                       select k;
+                            var values = new StringBuilder();
+                            foreach (var k in keys)
+                            {
+                                values.AppendFormat("<{0}>{1}<{0}>", k, row[k]);
+                            }
+                            const string xmlWrapper = "<data>{0}</data>";
+                            tblMap.Data = string.Format(xmlWrapper, values);
                         }
-                        const string xmlWrapper = "<data>{0}</data>";
-                        tblMap.Data = string.Format(xmlWrapper, values);
                     }
+                }
+                else
+                {
+                    Trace.TraceError("Stored Procedure is not created, no data can be loaded.");
                 }
             }
             else
             {
-                Trace.TraceError("Table is not created, no data loaded.");
+                Trace.TraceError("Table is not created, no data can be loaded.");
             }
         }
     }
