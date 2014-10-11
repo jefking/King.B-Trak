@@ -31,17 +31,17 @@
         /// <summary>
         /// Schema Reader
         /// </summary>
-        protected readonly SchemaReader reader = null;
+        protected readonly ISchemaReader reader = null;
 
         /// <summary>
         /// Azure Table Storage Writer
         /// </summary>
-        protected readonly TableStorageWriter writer = null;
+        protected readonly ITableStorageWriter writer = null;
 
         /// <summary>
         /// Sql Data Loader
         /// </summary>
-        protected readonly SqlDataLoader loader = null;
+        protected readonly ISqlDataLoader loader = null;
 
         /// <summary>
         /// Azure Storage Resources
@@ -51,12 +51,12 @@
         /// <summary>
         /// Table Storage Reader
         /// </summary>
-        protected readonly TableStorageReader tableStorageReader = null;
+        protected readonly ITableStorageReader tableStorageReader = null;
 
         /// <summary>
         /// SQL Data Writer
         /// </summary>
-        protected readonly SqlDataWriter sqlDataWriter = null;
+        protected readonly ISqlDataWriter sqlDataWriter = null;
         #endregion
 
         #region Constructors
@@ -112,12 +112,12 @@
             var operation = "Table";//"SQL Server"
             Trace.TraceInformation("Loading {0} Schema.", operation);
             //var schemas = this.reader.Load(SchemaTypes.Table).Result;
-            var schemas = tableStorageReader.Load();
+            var schemas = this.tableStorageReader.Load();
             Trace.TraceInformation("Loaded {0} Schema.", operation);
 
             Trace.TraceInformation("Loading {0} Data.", operation);
             //var tables = this.loader.Retrieve(schemas);
-            var data = tableStorageReader.Retrieve(schemas).Result;
+            var data = this.tableStorageReader.Retrieve(schemas).Result;
             Trace.TraceInformation("Loaded {0} Data.", operation);
 
             Trace.TraceInformation("Storing {0} Data.", operation);

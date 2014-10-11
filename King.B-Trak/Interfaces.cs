@@ -1,5 +1,6 @@
 ﻿namespace King.BTrak
 {
+    using King.Azure.Data;
     using King.BTrak.Models;
     using King.Data.Sql.Reflection.Models;
     using System.Collections.Generic;
@@ -63,11 +64,12 @@
 
     public interface ITableStorageReader
     {
-
+        IEnumerable<ITableStorage> Load();
+        Task<IEnumerable<SqlData>> Retrieve(IEnumerable<ITableStorage> tables);
     }
 
     public interface ISqlDataWriter
     {
-
+        Task Store(IEnumerable<SqlData> datas);
     }
 }

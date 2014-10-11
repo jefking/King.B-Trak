@@ -27,7 +27,7 @@
         /// <summary>
         /// Schema Reader
         /// </summary>
-        protected readonly SchemaReader reader = null;
+        protected readonly ISchemaReader reader = null;
 
         /// <summary>
         /// SQL Connection
@@ -41,7 +41,7 @@
         #endregion
 
         #region Constructors
-        public SqlDataWriter(string tableName, SchemaReader reader, string connectionString)
+        public SqlDataWriter(string tableName, ISchemaReader reader, string connectionString)
         {
             this.tableName = tableName;
             this.reader = reader;
