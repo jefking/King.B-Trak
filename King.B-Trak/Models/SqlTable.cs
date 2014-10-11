@@ -9,7 +9,7 @@
         /// </summary>
         public override string FullyQualifiedName()
         {
-            return string.Format("[{0}].[SaveTableData]", SqlDataWriter.Schema);
+            return string.Format("[{0}].[SaveTableData]", SqlStatements.Schema);
         }
     }
 }
