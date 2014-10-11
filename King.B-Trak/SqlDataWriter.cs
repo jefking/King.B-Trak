@@ -174,7 +174,7 @@ using System.Threading.Tasks;
                             var values = new StringBuilder();
                             foreach (var k in keys)
                             {
-                                values.AppendFormat("<{0}>{1}<{0}>", k, row[k]);
+                                values.AppendFormat("<{0}>{1}</{0}>", k, row[k]);
                             }
 
                             sproc.Data = string.Format("<data>{0}</data>", values);

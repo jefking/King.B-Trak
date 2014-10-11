@@ -90,8 +90,8 @@ namespace King.Mapper.Generated.Sql
         /// <summary>
         /// Gets or sets the parameter value
         /// </summary>
-		[DataMapper("@Data", DbType.Object)]
-		public virtual object Data
+		[DataMapper("@Data", DbType.String)]
+        public virtual string Data
 		{
 			get;
 			set;
