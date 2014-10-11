@@ -60,4 +60,14 @@
         #endregion
     }
     #endregion
+
+    public interface ITableStorageReader
+    {
+
+    }
+
+    public interface ISqlDataWriter
+    {
+
+    }
 }

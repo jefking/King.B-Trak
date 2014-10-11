@@ -10,10 +10,17 @@
     /// <summary>
     /// Table Storage Reader
     /// </summary>
-    public class TableStorageReader
+    public class TableStorageReader : ITableStorageReader
     {
         #region Members
+        /// <summary>
+        /// Azure Storage Resources
+        /// </summary>
         protected readonly IAzureStorageResources resources = null;
+
+        /// <summary>
+        /// Table Name
+        /// </summary>
         protected readonly string tableName = null;
         #endregion
 

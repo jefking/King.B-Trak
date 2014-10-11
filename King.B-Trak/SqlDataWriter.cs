@@ -16,7 +16,7 @@
     /// <summary>
     /// SQL Data Writer
     /// </summary>
-    public class SqlDataWriter
+    public class SqlDataWriter : ISqlDataWriter
     {
         #region Members
         /// <summary>
