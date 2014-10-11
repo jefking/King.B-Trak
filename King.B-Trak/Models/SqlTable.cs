@@ -1,49 +1,15 @@
 ﻿namespace King.BTrak.Models
 {
-    using System;
+    using King.Mapper.Generated.Sql;
 
-    public class SqlTable
+    public class SqlTable : dboSaveTableData
     {
-        public Guid Id
+        /// <summary>
+        /// Gets Stored Proc name with Schema
+        /// </summary>
+        public override string FullyQualifiedName()
         {
-            get;
-            set;
-        }
-
-        public string TableName
-        {
-            get;
-            set;
-        }
-
-        public string PartitionKey
-        {
-            get;
-            set;
-        }
-
-        public string RowKey
-        {
-            get;
-            set;
-        }
-
-        public string ETag
-        {
-            get;
-            set;
-        }
-
-        public DateTime Timestamp
-        {
-            get;
-            set;
-        }
-
-        public string Data
-        {
-            get;
-            set;
+            return string.Format("[{0}].[SaveTableData]", SqlDataWriter.Schema);
         }
     }
 }
