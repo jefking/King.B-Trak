@@ -1,12 +1,15 @@
 ﻿namespace King.BTrak
 {
+    using King.Azure.Data;
     using King.BTrak.Models;
     using King.Data.Sql.Reflection;
     using King.Mapper;
+    using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
     public class SqlDataWriter
@@ -69,7 +72,25 @@
             {
                 foreach (var data in datas)
                 {
-                    var tblMap = data.Map<SqlTable>();
+                    foreach (var row in data.Rows)
+                    {
+                        var tblMap = row.Map<SqlTable>();
+                        tblMap.TableName = data.TableName;
+                        tblMap.Id = Guid.NewGuid();
+                        var keys = from k in row.Keys
+                                   where k != TableStorage.ETag
+                                       && k != TableStorage.PartitionKey
+                                       && k != TableStorage.RowKey
+                                       && k != TableStorage.Timestamp
+                                   select k;
+                        var values = new StringBuilder();
+                        foreach (var k in keys)
+                        {
+                            values.AppendFormat("<{0}>{1}<{0}>", k, row[k]);
+                        }
+                        const string xmlWrapper = "<data>{0}</data>";
+                        tblMap.Data = string.Format(xmlWrapper, values);
+                    }
                 }
             }
             else
