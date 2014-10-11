@@ -11,7 +11,7 @@
         /// <summary>
         /// 
         /// </summary>
-        string SQLConenction
+        string SqlConenction
         {
             get;
         }

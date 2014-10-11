@@ -1,7 +1,7 @@
 ﻿namespace King.BTrak.Models
 {
     /// <summary>
-    /// 
+    /// Configuration Values
     /// </summary>
     public class ConfigValues : IConfigValues
     {
@@ -9,7 +9,7 @@
         /// <summary>
         /// SQL Conenction String
         /// </summary>
-        public virtual string SQLConenction
+        public virtual string SqlConenction
         {
             get;
             set;
@@ -32,6 +32,17 @@
             get;
             set;
         }
+
+        /// <summary>
+        /// SQL Table Name
+        /// </summary>
+        public string SqlTableName
+        {
+            get;
+            set;
+        }
         #endregion
+
+
     }
 }

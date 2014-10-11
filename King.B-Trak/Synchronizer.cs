@@ -58,8 +58,8 @@
 
             this.config = config;
             this.table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
-            this.database = new SqlConnection(config.SQLConenction);
-            this.reader = new SchemaReader(this.config.SQLConenction);
+            this.database = new SqlConnection(config.SqlConenction);
+            this.reader = new SchemaReader(this.config.SqlConenction);
             this.writer = new TableStorageWriter(this.table);
             this.loader = new SqlDataLoader(this.database);
         }

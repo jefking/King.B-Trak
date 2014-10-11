@@ -37,9 +37,10 @@
         {
             return new ConfigValues
             {
-                SQLConenction = this.arguments.ElementAt(0),
+                SqlConenction = this.arguments.ElementAt(0),
                 StorageAccountConnection = this.arguments.ElementAt(1),
                 StorageTableName = ConfigurationManager.AppSettings["StorageTable"],
+                SqlTableName = ConfigurationManager.AppSettings["SqlTable"],
             };
         }
         #endregion
