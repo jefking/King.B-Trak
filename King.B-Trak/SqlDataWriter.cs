@@ -36,11 +36,6 @@
         /// </summary>
         protected readonly SqlConnection database = null;
 
-        /// <summary>
-        /// Dynamic Loader
-        /// </summary>
-        protected readonly IDynamicLoader loader = new DynamicLoader();
-
         public SqlDataWriter(IConfigValues config)
         {
             this.tableName = config.SqlTableName;
@@ -58,18 +53,25 @@
                 var statement = string.Format(table, this.tableName);
                 var cmd = this.database.CreateCommand();
                 cmd.CommandText = statement;
-                await cmd.ExecuteNonQueryAsync();
-                return true;
+                return 1 == await cmd.ExecuteNonQueryAsync();
             }
 
             return false;
         }
 
-        public void Store(IEnumerable<IDictionary<string, object>> datas)
+        public async Task Store(IEnumerable<IDictionary<string, object>> datas)
         {
-            foreach (var data in datas)
+            var created = await this.CreateTable();
+            if (created)
             {
+                foreach (var data in datas)
+                {
 
+                }
+            }
+            else
+            {
+                Trace.TraceError("Table is not created, no data loaded.");
             }
         }
     }
