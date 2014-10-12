@@ -5,6 +5,7 @@
     using Microsoft.WindowsAzure.Storage.Table;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -69,6 +70,7 @@
             var datas = new List<TableData>();
             foreach (var table in tables)
             {
+                Trace.TraceInformation("Reading from table: {0}.", table.Name);
                 var data = new TableData
                 {
                     TableName = table.Name,
@@ -76,6 +78,8 @@
                 };
 
                 datas.Add(data);
+
+                Trace.TraceInformation("Rows Read: {0}", data.Rows.Count());
             }
 
             return datas;

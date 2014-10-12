@@ -91,7 +91,8 @@
             foreach (var schema in schemas)
             {
                 var sql = string.Format(SqlStatements.SelectDataFormat, schema.Preface, schema.Name);
-                Trace.TraceInformation(sql);
+
+                Trace.TraceInformation("Loading data from [{0}].[{1}]", schema.Preface, schema.Name);
 
                 var ds = await this.executor.Query(sql);
 
