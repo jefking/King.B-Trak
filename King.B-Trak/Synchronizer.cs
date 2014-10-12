@@ -14,29 +14,19 @@
     {
         #region Members
         /// <summary>
-        /// Configuration Values
-        /// </summary>
-        protected readonly IConfigValues config = null;
-
-        /// <summary>
-        /// Table Storage
-        /// </summary>
-        protected readonly ITableStorage table = null;
-
-        /// <summary>
         /// Schema Reader
         /// </summary>
-        protected readonly ISchemaReader reader = null;
+        protected readonly ISchemaReader schemaReader = null;
 
         /// <summary>
         /// Azure Table Storage Writer
         /// </summary>
-        protected readonly ITableStorageWriter writer = null;
+        protected readonly ITableStorageWriter tableStorageWriter = null;
 
         /// <summary>
         /// Sql Data Loader
         /// </summary>
-        protected readonly ISqlDataLoader loader = null;
+        protected readonly ISqlDataLoader sqlDataLoader = null;
 
         /// <summary>
         /// Azure Storage Resources
@@ -66,15 +56,15 @@
                 throw new ArgumentNullException("config");
             }
 
-            this.config = config;
-            this.table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
+            var table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
             var database = new SqlConnection(config.SqlConenction);
-            this.reader = new SchemaReader(this.config.SqlConenction);
-            this.writer = new TableStorageWriter(this.table);
-            this.loader = new SqlDataLoader(database);
+
+            this.schemaReader = new SchemaReader(config.SqlConenction);
+            this.tableStorageWriter = new TableStorageWriter(table);
+            this.sqlDataLoader = new SqlDataLoader(database);
             this.storageResources = new AzureStorageResources(config.StorageAccountConnection);
             this.tableStorageReader = new TableStorageReader(this.storageResources, config.StorageTableName);
-            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, this.reader, config.SqlConenction);
+            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, this.schemaReader, config.SqlConenction);
         }
         #endregion
 
