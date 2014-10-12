@@ -94,7 +94,7 @@
             {
                 var tbl = Substitute.For<ITableStorage>();
                 tbl.Name.Returns(Guid.NewGuid().ToString());
-                tbl.Query(Arg.Any<TableQuery>()).Returns(Task.FromResult<IEnumerable<IDictionary<string, object>>>(null));
+                tbl.Query(Arg.Any<TableQuery>()).Returns(Task.FromResult<IEnumerable<IDictionary<string, object>>>(new List<IDictionary<string, object>>()));
 
                 tables.Add(tbl);
             }
