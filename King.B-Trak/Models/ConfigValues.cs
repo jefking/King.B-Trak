@@ -47,10 +47,8 @@
         /// </summary>
         public Direction SyncDirection
         {
-            get
-            {
-                return Direction.SqlToTable;
-            }
+            get;
+            set;
         }
         #endregion
     }

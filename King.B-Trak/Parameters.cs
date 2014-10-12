@@ -35,10 +35,15 @@
         /// <returns>Configuration Values</returns>
         public virtual IConfigValues Process()
         {
+            var first = this.arguments.ElementAt(0);
+            var second = this.arguments.ElementAt(1);
+            var direction = first.ToLowerInvariant().Contains("server") && first.ToLowerInvariant().Contains("database")
+                ? Direction.SqlToTable : Direction.TableToSql;
             return new ConfigValues
             {
-                SqlConenction = this.arguments.ElementAt(1),
-                StorageAccountConnection = this.arguments.ElementAt(0),
+                SyncDirection = direction,
+                SqlConenction = direction == Direction.SqlToTable ? first : second,
+                StorageAccountConnection = direction == Direction.TableToSql ? first : second,
                 StorageTableName = ConfigurationManager.AppSettings["StorageTable"],
                 SqlTableName = ConfigurationManager.AppSettings["SqlTable"],
             };
