@@ -32,8 +32,8 @@
         /// <summary>
         /// Run
         /// </summary>
-        /// <returns>Self</returns>
-        ISynchronizer Run();
+        /// <returns>Task</returns>
+        Task Run();
         #endregion
     }
     #endregion

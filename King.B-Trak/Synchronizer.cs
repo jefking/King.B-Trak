@@ -6,6 +6,7 @@
     using System;
     using System.Data.SqlClient;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Data Synchronizer
@@ -16,7 +17,7 @@
         /// <summary>
         /// Schema Reader
         /// </summary>
-        protected readonly ISchemaReader schemaReader = null;
+        protected readonly ISchemaReader sqlSchemaReader = null;
 
         /// <summary>
         /// Azure Table Storage Writer
@@ -59,12 +60,12 @@
             var table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
             var database = new SqlConnection(config.SqlConenction);
 
-            this.schemaReader = new SchemaReader(config.SqlConenction);
+            this.sqlSchemaReader = new SchemaReader(config.SqlConenction);
             this.tableStorageWriter = new TableStorageWriter(table);
             this.sqlDataLoader = new SqlDataLoader(database);
             this.storageResources = new AzureStorageResources(config.StorageAccountConnection);
             this.tableStorageReader = new TableStorageReader(this.storageResources, config.StorageTableName);
-            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, this.schemaReader, config.SqlConenction);
+            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, this.sqlSchemaReader, config.SqlConenction);
         }
         #endregion
 
@@ -73,25 +74,23 @@
         /// Run Synchronization
         /// </summary>
         /// <returns>Synchronizer</returns>
-        public virtual ISynchronizer Run()
+        public virtual async Task Run()
         {
             var operation = "Table";//"SQL Server"
             Trace.TraceInformation("Loading {0} Schema.", operation);
-            //var schemas = this.reader.Load(SchemaTypes.Table).Result;
-            var schemas = this.tableStorageReader.Load();
+            var sqlSchema = await this.sqlSchemaReader.Load(SchemaTypes.Table);
+            var tableSchema = this.tableStorageReader.Load();
             Trace.TraceInformation("Loaded {0} Schema.", operation);
 
             Trace.TraceInformation("Loading {0} Data.", operation);
-            //var tables = this.loader.Retrieve(schemas);
-            var data = this.tableStorageReader.Retrieve(schemas).Result;
+            var sqlData = this.sqlDataLoader.Retrieve(sqlSchema);
+            var tableData = await this.tableStorageReader.Retrieve(tableSchema);
             Trace.TraceInformation("Loaded {0} Data.", operation);
 
             Trace.TraceInformation("Storing {0} Data.", operation);
-            //this.writer.Store(tables).Wait();
-            this.sqlDataWriter.Store(data).Wait();
+            this.tableStorageWriter.Store(sqlData).Wait();
+            this.sqlDataWriter.Store(tableData).Wait();
             Trace.TraceInformation("Stored {0} Data.", operation);
-
-            return this;
         }
         #endregion
     }

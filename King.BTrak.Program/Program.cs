@@ -29,8 +29,8 @@
                     , config.StorageTableName
                     , Environment.NewLine);
 
-                new Synchronizer(config)
-                    .Run();
+                var s = new Synchronizer(config);
+                s.Run().Wait();
             }
             catch (Exception ex)
             {
