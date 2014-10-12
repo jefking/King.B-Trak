@@ -63,11 +63,17 @@
     {
         #region Methods
         /// <summary>
-        /// 
+        /// Retrieve Table Data
         /// </summary>
-        /// <param name="schemas"></param>
-        /// <returns></returns>
+        /// <param name="schemas">Schemas</param>
+        /// <returns>Table Data</returns>
         IEnumerable<TableData> Retrieve(IEnumerable<IDefinition> schemas);
+
+        /// <summary>
+        /// Load Definitions
+        /// </summary>
+        /// <returns>Schema</returns>
+        Task<IEnumerable<IDefinition>> Load();
         #endregion
     }
     #endregion

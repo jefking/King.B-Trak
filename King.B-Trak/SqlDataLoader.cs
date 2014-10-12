@@ -1,6 +1,7 @@
 ﻿namespace King.BTrak
 {
     using King.BTrak.Models;
+    using King.Data.Sql.Reflection;
     using King.Data.Sql.Reflection.Models;
     using King.Mapper.Data;
     using System;
@@ -9,6 +10,7 @@
     using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// SQL Data Loader
@@ -25,6 +27,11 @@
         /// Dynamic Loader
         /// </summary>
         protected readonly IDynamicLoader loader = new DynamicLoader();
+        
+        /// <summary>
+        /// Schema Reader
+        /// </summary>
+        protected readonly ISchemaReader sqlSchemaReader = null;
         #endregion
 
         #region Constructors
@@ -32,7 +39,7 @@
         /// Default Constructor
         /// </summary>
         /// <param name="database"></param>
-        public SqlDataLoader(SqlConnection database)
+        public SqlDataLoader(SqlConnection database, ISchemaReader schemaReader)
         {
             if (null == database)
             {
@@ -40,10 +47,20 @@
             }
 
             this.database = database;
+            this.sqlSchemaReader = schemaReader;
         }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Load Definitions
+        /// </summary>
+        /// <returns>Schema</returns>
+        public async Task<IEnumerable<IDefinition>> Load()
+        {
+            return await this.sqlSchemaReader.Load(SchemaTypes.Table);
+        }
+
         /// <summary>
         /// Retrieve Table Data
         /// </summary>
