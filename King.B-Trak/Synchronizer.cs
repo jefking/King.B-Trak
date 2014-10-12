@@ -19,11 +19,6 @@
         protected readonly IConfigValues config = null;
 
         /// <summary>
-        /// SQL Connection
-        /// </summary>
-        protected readonly SqlConnection database = null;
-
-        /// <summary>
         /// Table Storage
         /// </summary>
         protected readonly ITableStorage table = null;
@@ -73,10 +68,10 @@
 
             this.config = config;
             this.table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
-            this.database = new SqlConnection(config.SqlConenction);
+            var database = new SqlConnection(config.SqlConenction);
             this.reader = new SchemaReader(this.config.SqlConenction);
             this.writer = new TableStorageWriter(this.table);
-            this.loader = new SqlDataLoader(this.database);
+            this.loader = new SqlDataLoader(database);
             this.storageResources = new AzureStorageResources(config.StorageAccountConnection);
             this.tableStorageReader = new TableStorageReader(this.storageResources, config.StorageTableName);
             this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, this.reader, config.SqlConenction);
