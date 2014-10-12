@@ -39,6 +39,14 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Sync Direction
+        /// </summary>
+        Direction SyncDirection
+        {
+            get;
+        }
         #endregion
     }
     #endregion

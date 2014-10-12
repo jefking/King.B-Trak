@@ -63,24 +63,44 @@
         /// <summary>
         /// Run Synchronization
         /// </summary>
-        /// <returns>Synchronizer</returns>
-        public virtual async Task Run()
+        /// <param name="direction">Direction</param>
+        /// <returns>Task</returns>
+        public virtual async Task Run(Direction direction)
         {
-            var operation = "Table";//"SQL Server"
-            Trace.TraceInformation("Loading {0} Schema.", operation);
-            var sqlSchema = await this.sqlDataLoader.Load();
-            var tableSchema = this.tableStorageReader.Load();
-            Trace.TraceInformation("Loaded {0} Schema.", operation);
+            var operation = string.Empty;
+            switch (direction)
+            {
+                case Direction.SqlToTable:
+                    operation = "SQL Server";
+                    Trace.TraceInformation("Loading {0} Schema.", operation);
+                    var sqlSchema = await this.sqlDataLoader.Load();
+                    Trace.TraceInformation("Loaded {0} Schema.", operation);
 
-            Trace.TraceInformation("Loading {0} Data.", operation);
-            var sqlData = this.sqlDataLoader.Retrieve(sqlSchema);
-            var tableData = await this.tableStorageReader.Retrieve(tableSchema);
-            Trace.TraceInformation("Loaded {0} Data.", operation);
+                    Trace.TraceInformation("Loading {0} Data.", operation);
+                    var sqlData = this.sqlDataLoader.Retrieve(sqlSchema);
+                    Trace.TraceInformation("Loaded {0} Data.", operation);
 
-            Trace.TraceInformation("Storing {0} Data.", operation);
-            this.tableStorageWriter.Store(sqlData).Wait();
-            this.sqlDataWriter.Store(tableData).Wait();
-            Trace.TraceInformation("Stored {0} Data.", operation);
+                    Trace.TraceInformation("Storing {0} Data.", operation);
+                    await this.tableStorageWriter.Store(sqlData);
+                    Trace.TraceInformation("Stored {0} Data.", operation);
+                    break;
+                case Direction.TableToSql:
+                    operation = "Table";
+                    Trace.TraceInformation("Loading {0} Schema.", operation);
+                    var tableSchema = this.tableStorageReader.Load();
+                    Trace.TraceInformation("Loaded {0} Schema.", operation);
+
+                    Trace.TraceInformation("Loading {0} Data.", operation);
+                    var tableData = await this.tableStorageReader.Retrieve(tableSchema);
+                    Trace.TraceInformation("Loaded {0} Data.", operation);
+
+                    Trace.TraceInformation("Storing {0} Data.", operation);
+                    await this.sqlDataWriter.Store(tableData);
+                    Trace.TraceInformation("Stored {0} Data.", operation);
+                    break;
+                default:
+                    throw new InvalidOperationException("Unknown sync direction.");
+            }
         }
         #endregion
     }

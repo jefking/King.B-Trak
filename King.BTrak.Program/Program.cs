@@ -30,7 +30,7 @@
                     , Environment.NewLine);
 
                 var s = new Synchronizer(config);
-                s.Run().Wait();
+                s.Run(config.SyncDirection).Wait();
             }
             catch (Exception ex)
             {

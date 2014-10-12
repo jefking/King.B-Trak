@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Models\ConfigValues.cs" />
     <Compile Include="Models\Interfaces.cs" />

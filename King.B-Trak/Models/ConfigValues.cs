@@ -41,8 +41,17 @@
             get;
             set;
         }
+
+        /// <summary>
+        /// Sync Direction
+        /// </summary>
+        public Direction SyncDirection
+        {
+            get
+            {
+                return Direction.TableToSql;
+            }
+        }
         #endregion
-
-
     }
 }
