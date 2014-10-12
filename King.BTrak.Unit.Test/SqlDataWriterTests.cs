@@ -1,5 +1,6 @@
 ﻿namespace King.BTrak.Unit.Test
 {
+    using King.Azure.Data;
     using King.BTrak.Models;
     using King.BTrak.Sql;
     using King.Data.Sql.Reflection;
@@ -140,8 +141,13 @@
             var tableName = Guid.NewGuid().ToString();
             var tableStatement = string.Format(SqlStatements.CreateTable, SqlStatements.Schema, tableName);
             var sprocStatement = string.Format(SqlStatements.CreateStoredProcedure, SqlStatements.Schema, tableName);
+            var row = new Dictionary<string, object>();
+            row.Add(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+            row.Add(TableStorage.PartitionKey, Guid.NewGuid().ToString());
+            row.Add(TableStorage.RowKey, Guid.NewGuid().ToString());
+            row.Add(TableStorage.ETag, Guid.NewGuid().ToString());
             var rows = new List<IDictionary<string, object>>();
-            rows.Add(new Dictionary<string, object>());
+            rows.Add(row);
             var data = new TableData()
             {
                 TableName = Guid.NewGuid().ToString(),
@@ -165,6 +171,39 @@
             executor.Received().NonQuery(tableStatement);
             executor.Received().NonQuery(sprocStatement);
             executor.Received().NonQuery(Arg.Any<SaveData>());
+        }
+
+        [Test]
+        public async Task StoreTableNotCreated()
+        {
+            var tableName = Guid.NewGuid().ToString();
+            var tableStatement = string.Format(SqlStatements.CreateTable, SqlStatements.Schema, tableName);
+            var row = new Dictionary<string, object>();
+            row.Add(Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+            row.Add(TableStorage.PartitionKey, Guid.NewGuid().ToString());
+            row.Add(TableStorage.RowKey, Guid.NewGuid().ToString());
+            row.Add(TableStorage.ETag, Guid.NewGuid().ToString());
+            var rows = new List<IDictionary<string, object>>();
+            rows.Add(row);
+            var data = new TableData()
+            {
+                TableName = Guid.NewGuid().ToString(),
+                Rows = rows,
+            };
+            var dataSets = new List<TableData>();
+            dataSets.Add(data);
+            var reader = Substitute.For<ISchemaReader>();
+            reader.Load(SchemaTypes.Table).Returns(Task.FromResult<IEnumerable<IDefinition>>(new List<IDefinition>()));
+            var executor = Substitute.For<IExecutor>();
+            executor.NonQuery(tableStatement).Returns(Task.FromResult(0));
+            executor.NonQuery(Arg.Any<SaveData>());
+
+            var writer = new SqlDataWriter(reader, executor, tableName);
+            await writer.Store(dataSets);
+
+            reader.Received().Load(SchemaTypes.Table);
+            executor.Received().NonQuery(tableStatement);
+            executor.Received(0).NonQuery(Arg.Any<SaveData>());
         }
     }
 }
