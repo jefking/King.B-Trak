@@ -70,7 +70,7 @@
                 var tableStatement = string.Format(SqlStatements.CreateTable, SqlStatements.Schema, this.tableName);
                 var sprocStatement = string.Format(SqlStatements.CreateStoredProcedure, SqlStatements.Schema, this.tableName);
                 return await this.Create(SchemaTypes.Table, this.tableName, tableStatement)
-                    && await this.Create(SchemaTypes.StoredProcedure, "SaveTableData", sprocStatement);
+                    && await this.Create(SchemaTypes.StoredProcedure, SqlStatements.StoredProcedureName, sprocStatement);
         }
 
         /// <summary>
