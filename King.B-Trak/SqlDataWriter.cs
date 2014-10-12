@@ -67,10 +67,10 @@
         /// <returns>Success</returns>
         public virtual async Task<bool> Initialize()
         {
-                var tableStatement = string.Format(SqlStatements.CreateTable, SqlStatements.Schema, this.tableName);
-                var sprocStatement = string.Format(SqlStatements.CreateStoredProcedure, SqlStatements.Schema, this.tableName);
-                return await this.Create(SchemaTypes.Table, this.tableName, tableStatement)
-                    && await this.Create(SchemaTypes.StoredProcedure, SqlStatements.StoredProcedureName, sprocStatement);
+            var tableStatement = string.Format(SqlStatements.CreateTable, SqlStatements.Schema, this.tableName);
+            var sprocStatement = string.Format(SqlStatements.CreateStoredProcedure, SqlStatements.Schema, this.tableName);
+            return await this.Create(SchemaTypes.Table, this.tableName, tableStatement)
+                && await this.Create(SchemaTypes.StoredProcedure, SqlStatements.StoredProcedureName, sprocStatement);
         }
 
         /// <summary>
@@ -99,33 +99,31 @@
         /// <summary>
         /// Stores Data
         /// </summary>
-        /// <param name="dataSet">Data Sets</param>
+        /// <param name="dataSets">Data Sets</param>
         /// <returns>Task</returns>
-        public virtual async Task Store(IEnumerable<TableData> dataSet)
+        public virtual async Task Store(IEnumerable<TableData> dataSets)
         {
             var created = await this.Initialize();
             if (created)
             {
-                foreach (var data in dataSet)
+                foreach (var dataSet in dataSets)
                 {
-                    foreach (var row in data.Rows)
+                    foreach (var row in dataSet.Rows)
                     {
                         var sproc = row.Map<SaveData>();
-                        sproc.TableName = data.TableName;
+                        sproc.TableName = dataSet.TableName;
                         sproc.Id = Guid.NewGuid();
-                        var keys = from k in row.Keys
-                                   where k != TableStorage.ETag
-                                       && k != TableStorage.PartitionKey
-                                       && k != TableStorage.RowKey
-                                       && k != TableStorage.Timestamp
-                                   select k;
-                        var values = new StringBuilder();
-                        foreach (var k in keys)
-                        {
-                            values.AppendFormat("<{0}>{1}</{0}>", k, row[k]);
-                        }
 
-                        sproc.Data = string.Format("<data>{0}</data>", values);
+                        sproc.Data = string.Format("<data>{0}</data>",
+                            string.Concat(
+                                            from k in row.Keys
+                                            where k != TableStorage.ETag
+                                                && k != TableStorage.PartitionKey
+                                                && k != TableStorage.RowKey
+                                                && k != TableStorage.Timestamp
+                                            select string.Format("<{0}>{1}</{0}>", k, row[k])
+                                        )
+                                    );
 
                         await this.executor.NonQuery(sproc);
                     }
