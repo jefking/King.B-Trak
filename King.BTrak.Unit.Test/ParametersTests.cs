@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
 
     [TestFixture]
-    public class ParametersTest
+    public class ParametersTests
     {
         [Test]
         public void Constructor()
