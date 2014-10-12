@@ -49,6 +49,19 @@
         /// </summary>
         public SqlDataWriter(string tableName, ISchemaReader reader, IExecutor executor)
         {
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                throw new ArgumentException("tableName");
+            }
+            if (null == reader)
+            {
+                throw new ArgumentNullException("reader");
+            }
+            if (null == executor)
+            {
+                throw new ArgumentNullException("executor");
+            }
+
             this.tableName = tableName;
             this.reader = reader;
             this.executor = executor;

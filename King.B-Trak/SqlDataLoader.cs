@@ -49,6 +49,14 @@
             {
                 throw new ArgumentNullException("database");
             }
+            if (null == schemaReader)
+            {
+                throw new ArgumentNullException("schemaReader");
+            }
+            if (string.IsNullOrWhiteSpace(sqlTableName))
+            {
+                throw new ArgumentException("sqlTableName");
+            }
 
             this.database = database;
             this.sqlSchemaReader = schemaReader;
