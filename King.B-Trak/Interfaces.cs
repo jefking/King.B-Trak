@@ -30,12 +30,6 @@
     {
         #region Methods
         /// <summary>
-        /// Initialize
-        /// </summary>
-        /// <returns>Self</returns>
-        ISynchronizer Initialize();
-
-        /// <summary>
         /// Run
         /// </summary>
         /// <returns>Self</returns>

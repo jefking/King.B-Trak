@@ -85,25 +85,6 @@
 
         #region Methods
         /// <summary>
-        /// Innitialize Members
-        /// </summary>
-        /// <returns>Synchronizer</returns>
-        public virtual ISynchronizer Initialize()
-        {
-            Trace.TraceInformation("Initializing...");
-
-            Trace.TraceInformation("Opening connection to Database.");
-            this.database.Open();
-
-            Trace.TraceInformation("Creating Storage Table.");
-            this.table.CreateIfNotExists().Wait();
-
-            Trace.TraceInformation("Initialized.");
-
-            return this;
-        }
-
-        /// <summary>
         /// Run Synchronization
         /// </summary>
         /// <returns>Synchronizer</returns>

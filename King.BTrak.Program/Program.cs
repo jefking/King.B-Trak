@@ -30,7 +30,6 @@
                     , Environment.NewLine);
 
                 new Synchronizer(config)
-                    .Initialize()
                     .Run();
             }
             catch (Exception ex)

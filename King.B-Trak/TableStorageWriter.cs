@@ -37,6 +37,15 @@
 
         #region Methods
         /// <summary>
+        /// Initialize
+        /// </summary>
+        /// <returns>Success</returns>
+        public virtual async Task<bool> Initialize()
+        {
+            return await this.table.CreateIfNotExists();
+        }
+
+        /// <summary>
         /// Store Table Data
         /// </summary>
         /// <param name="tables">Tables</param>
