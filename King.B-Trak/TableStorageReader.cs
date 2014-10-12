@@ -71,6 +71,7 @@
             foreach (var table in tables)
             {
                 Trace.TraceInformation("Reading from table: {0}.", table.Name);
+
                 var data = new TableData
                 {
                     TableName = table.Name,
