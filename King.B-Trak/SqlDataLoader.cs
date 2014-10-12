@@ -72,8 +72,7 @@
         public async Task<IEnumerable<IDefinition>> Load()
         {
             return from t in await this.sqlSchemaReader.Load(SchemaTypes.Table)
-                   where t.Preface != SqlStatements.Schema
-                        && t.Name != this.sqlTableName
+                   where t.Preface != SqlStatements.Schema && t.Name != this.sqlTableName
                    select t;
         }
 
@@ -82,20 +81,16 @@
         /// </summary>
         /// <param name="schemas">Schemas</param>
         /// <returns>Table Data</returns>
-        public virtual IEnumerable<TableSqlData> Retrieve(IEnumerable<IDefinition> schemas)
+        public virtual async Task<IEnumerable<TableSqlData>> Retrieve(IEnumerable<IDefinition> schemas)
         {
             var tables = new List<TableSqlData>();
+            var executor = new Executor(this.database);
             foreach (var schema in schemas)
             {
                 var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK);", schema.Preface, schema.Name);
                 Trace.TraceInformation(sql);
 
-                var cmd = this.database.CreateCommand();
-                cmd.CommandText = sql;
-
-                var adapter = new SqlDataAdapter(cmd);
-                var ds = new DataSet();
-                adapter.Fill(ds);
+                var ds = await executor.Query(sql);
 
                 var data = new TableSqlData
                 {

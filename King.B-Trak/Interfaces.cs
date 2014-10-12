@@ -68,7 +68,7 @@
         /// </summary>
         /// <param name="schemas">Schemas</param>
         /// <returns>Table Data</returns>
-        IEnumerable<TableSqlData> Retrieve(IEnumerable<IDefinition> schemas);
+        Task<IEnumerable<TableSqlData>> Retrieve(IEnumerable<IDefinition> schemas);
 
         /// <summary>
         /// Load Definitions

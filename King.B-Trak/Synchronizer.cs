@@ -75,7 +75,7 @@
                     var sqlSchema = await this.sqlDataLoader.Load();
 
                     Trace.TraceInformation("Loading data from {0}.", from);
-                    var sqlData = this.sqlDataLoader.Retrieve(sqlSchema);
+                    var sqlData = await this.sqlDataLoader.Retrieve(sqlSchema);
 
                     Trace.TraceInformation("Storing data to {0}.", to);
                     await this.tableStorageWriter.Store(sqlData);
