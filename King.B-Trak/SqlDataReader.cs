@@ -25,7 +25,7 @@
         /// <summary>
         /// Dynamic Loader
         /// </summary>
-        protected readonly IDynamicLoader loader = new DynamicLoader();
+        protected readonly IDynamicLoader loader = null;
         
         /// <summary>
         /// Schema Reader
@@ -42,7 +42,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public SqlDataReader(IExecutor executor, ISchemaReader schemaReader, string sqlTableName)
+        public SqlDataReader(IExecutor executor, ISchemaReader schemaReader, IDynamicLoader loader, string sqlTableName)
         {
             if (null == executor)
             {
@@ -52,6 +52,10 @@
             {
                 throw new ArgumentNullException("schemaReader");
             }
+            if (null == loader)
+            {
+                throw new ArgumentNullException("loader");
+            }
             if (string.IsNullOrWhiteSpace(sqlTableName))
             {
                 throw new ArgumentException("sqlTableName");
@@ -59,6 +63,7 @@
 
             this.executor = executor;
             this.sqlSchemaReader = schemaReader;
+            this.loader = loader;
             this.sqlTableName = sqlTableName;
         }
         #endregion
@@ -85,7 +90,7 @@
             var tables = new List<TableSqlData>();
             foreach (var schema in schemas)
             {
-                var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK);", schema.Preface, schema.Name);
+                var sql = string.Format(SqlStatements.SelectDataFormat, schema.Preface, schema.Name);
                 Trace.TraceInformation(sql);
 
                 var ds = await this.executor.Query(sql);

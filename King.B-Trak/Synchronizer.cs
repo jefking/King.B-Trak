@@ -58,7 +58,7 @@
                     this.sqlWriter = new SqlDataWriter(sqlSchemaReader, executor, config.SqlTableName);
                     break;
                 case Direction.SqlToTable:
-                    this.sqlReader = new SqlDataReader(executor, sqlSchemaReader, config.SqlTableName);
+                    this.sqlReader = new SqlDataReader(executor, sqlSchemaReader, new DynamicLoader(), config.SqlTableName);
                     this.tableWriter = new TableStorageWriter(new TableStorage(config.StorageTableName, config.StorageAccountConnection));
                     break;
                 default:
