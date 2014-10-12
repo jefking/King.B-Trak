@@ -131,7 +131,7 @@
             }
             else
             {
-                Trace.TraceError("Stored Procedure is not created, no data can be loaded.");
+                Trace.TraceError("Table or Stored Procedure is not created, no data can be loaded.");
             }
         }
         #endregion
