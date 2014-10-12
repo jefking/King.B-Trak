@@ -47,14 +47,11 @@
                 throw new ArgumentNullException("config");
             }
 
-            var table = new TableStorage(config.StorageTableName, config.StorageAccountConnection);
-            var database = new SqlConnection(config.SqlConenction);
-            var storageResources = new AzureStorageResources(config.StorageAccountConnection);
             var sqlSchemaReader = new SchemaReader(config.SqlConenction);
 
-            this.tableStorageWriter = new TableStorageWriter(table);
-            this.sqlDataLoader = new SqlDataLoader(database, sqlSchemaReader);
-            this.tableStorageReader = new TableStorageReader(storageResources, config.StorageTableName);
+            this.tableStorageWriter = new TableStorageWriter(new TableStorage(config.StorageTableName, config.StorageAccountConnection));
+            this.sqlDataLoader = new SqlDataLoader(new SqlConnection(config.SqlConenction), sqlSchemaReader);
+            this.tableStorageReader = new TableStorageReader(new AzureStorageResources(config.StorageAccountConnection), config.StorageTableName);
             this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, sqlSchemaReader, config.SqlConenction);
         }
         #endregion
