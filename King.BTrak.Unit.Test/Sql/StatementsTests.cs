@@ -29,5 +29,11 @@
         {
             Assert.AreEqual("SELECT * FROM [{0}].[{1}] WITH(NOLOCK);", SqlStatements.SelectDataFormat);
         }
+
+        [Test]
+        public void StoredProcedureName()
+        {
+            Assert.AreEqual("SaveTableData", SqlStatements.StoredProcedureName);
+        }
     }
 }

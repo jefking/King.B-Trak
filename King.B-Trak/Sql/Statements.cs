@@ -33,6 +33,11 @@
                                     );";
 
         /// <summary>
+        /// Stored Procedure Name
+        /// </summary>
+        public const string StoredProcedureName = "SaveTableData";
+
+        /// <summary>
         /// Create Stored Procedure Statement
         /// </summary>
         public const string CreateStoredProcedure = @"CREATE PROCEDURE [{0}].[SaveTableData]
