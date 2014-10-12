@@ -49,11 +49,12 @@
             }
 
             var sqlSchemaReader = new SchemaReader(config.SqlConenction);
+            var executor = new Executor(new SqlConnection(config.SqlConenction));
 
             this.tableStorageWriter = new TableStorageWriter(new TableStorage(config.StorageTableName, config.StorageAccountConnection));
-            this.sqlDataLoader = new SqlDataReader(new Executor(new SqlConnection(config.SqlConenction)), sqlSchemaReader, config.SqlTableName);
+            this.sqlDataLoader = new SqlDataReader(executor, sqlSchemaReader, config.SqlTableName);
             this.tableStorageReader = new TableStorageReader(new AzureStorageResources(config.StorageAccountConnection), config.StorageTableName);
-            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, sqlSchemaReader, config.SqlConenction);
+            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, sqlSchemaReader, executor);
         }
         #endregion
 

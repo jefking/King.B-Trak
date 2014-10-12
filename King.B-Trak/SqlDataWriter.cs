@@ -8,7 +8,6 @@
     using King.Mapper.Data;
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
@@ -37,14 +36,6 @@
         #endregion
 
         #region Constructors
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public SqlDataWriter(string tableName, ISchemaReader reader, string connectionString)
-            : this(tableName, reader, new Executor(new SqlConnection(connectionString)))
-        {
-        }
-
         /// <summary>
         /// Mockable Constructor
         /// </summary>
