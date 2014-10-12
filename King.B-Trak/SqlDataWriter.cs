@@ -2,6 +2,7 @@
 {
     using King.Azure.Data;
     using King.BTrak.Models;
+    using King.BTrak.Sql;
     using King.Data.Sql.Reflection;
     using King.Mapper;
     using King.Mapper.Data;
@@ -118,7 +119,7 @@
                 {
                     foreach (var row in data.Rows)
                     {
-                        var sproc = row.Map<SqlTable>();
+                        var sproc = row.Map<SaveData>();
                         sproc.TableName = data.TableName;
                         sproc.Id = Guid.NewGuid();
                         var keys = from k in row.Keys

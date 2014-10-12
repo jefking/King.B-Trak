@@ -1,6 +1,7 @@
 ﻿namespace King.BTrak
 {
     using King.BTrak.Models;
+    using King.BTrak.Sql;
     using King.Data.Sql.Reflection;
     using King.Data.Sql.Reflection.Models;
     using King.Mapper.Data;
