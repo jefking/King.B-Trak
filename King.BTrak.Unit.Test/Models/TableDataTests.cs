@@ -37,17 +37,5 @@
 
             Assert.AreEqual(expected, c.Rows);
         }
-
-        [Test]
-        public void PrimaryKeyColumns()
-        {
-            var expected = new List<string>();
-            var c = new TableData
-            {
-                PrimaryKeyColumns = expected,
-            };
-
-            Assert.AreEqual(expected, c.PrimaryKeyColumns);
-        }
     }
 }

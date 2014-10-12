@@ -98,7 +98,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Models\ConfigValuesTests.cs" />
-    <Compile Include="Models\SqlDataTests.cs" />
+    <Compile Include="Models\TableSqlDataTests.cs" />
     <Compile Include="Models\SqlTableTests.cs" />
     <Compile Include="Models\TableDataTests.cs" />
     <Compile Include="ParametersTests.cs" />

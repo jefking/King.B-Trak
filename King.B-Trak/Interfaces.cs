@@ -51,7 +51,7 @@
         /// </summary>
         /// <param name="tables"></param>
         /// <returns></returns>
-        Task Store(IEnumerable<TableData> tables);
+        Task Store(IEnumerable<TableSqlData> tables);
         #endregion
     }
     #endregion
@@ -68,7 +68,7 @@
         /// </summary>
         /// <param name="schemas">Schemas</param>
         /// <returns>Table Data</returns>
-        IEnumerable<TableData> Retrieve(IEnumerable<IDefinition> schemas);
+        IEnumerable<TableSqlData> Retrieve(IEnumerable<IDefinition> schemas);
 
         /// <summary>
         /// Load Definitions
@@ -97,7 +97,7 @@
         /// </summary>
         /// <param name="tables">Tables</param>
         /// <returns>SQL Data</returns>
-        Task<IEnumerable<SqlData>> Retrieve(IEnumerable<ITableStorage> tables);
+        Task<IEnumerable<TableData>> Retrieve(IEnumerable<ITableStorage> tables);
         #endregion
     }
     #endregion
@@ -114,7 +114,7 @@
         /// </summary>
         /// <param name="dataSet">Data Sets</param>
         /// <returns>Task</returns>
-        Task Store(IEnumerable<SqlData> datas);
+        Task Store(IEnumerable<TableData> datas);
         #endregion
     }
     #endregion

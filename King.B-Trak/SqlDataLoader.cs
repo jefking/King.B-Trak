@@ -74,9 +74,9 @@
         /// </summary>
         /// <param name="schemas">Schemas</param>
         /// <returns>Table Data</returns>
-        public virtual IEnumerable<TableData> Retrieve(IEnumerable<IDefinition> schemas)
+        public virtual IEnumerable<TableSqlData> Retrieve(IEnumerable<IDefinition> schemas)
         {
-            var tables = new List<TableData>();
+            var tables = new List<TableSqlData>();
             foreach (var schema in schemas)
             {
                 var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK);", schema.Preface, schema.Name);
@@ -89,7 +89,7 @@
                 var ds = new DataSet();
                 adapter.Fill(ds);
 
-                var data = new TableData
+                var data = new TableSqlData
                 {
                     Rows = this.loader.Dictionaries(ds),
                     TableName = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),

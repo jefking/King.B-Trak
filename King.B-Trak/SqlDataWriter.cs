@@ -96,7 +96,7 @@
         /// </summary>
         /// <param name="dataSet">Data Sets</param>
         /// <returns>Task</returns>
-        public virtual async Task Store(IEnumerable<SqlData> dataSet)
+        public virtual async Task Store(IEnumerable<TableData> dataSet)
         {
             var created = await this.Initialize();
             if (created)

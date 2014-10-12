@@ -54,12 +54,12 @@
         /// </summary>
         /// <param name="tables">Tables</param>
         /// <returns>SQL Data</returns>
-        public async Task<IEnumerable<SqlData>> Retrieve(IEnumerable<ITableStorage> tables)
+        public async Task<IEnumerable<TableData>> Retrieve(IEnumerable<ITableStorage> tables)
         {
-            var datas = new List<SqlData>();
+            var datas = new List<TableData>();
             foreach (var table in tables)
             {
-                var data = new SqlData
+                var data = new TableData
                 {
                     TableName = table.Name,
                     Rows = await table.Query(new TableQuery()),

@@ -5,22 +5,13 @@
     /// <summary>
     /// Table Data
     /// </summary>
-    public class TableData
+    public class TableSqlData : TableData
     {
         #region Properties
         /// <summary>
-        /// Row Data
+        /// Primary Key Columns
         /// </summary>
-        public virtual IEnumerable<IDictionary<string, object>> Rows
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Table Name
-        /// </summary>
-        public virtual string TableName
+        public virtual IEnumerable<string> PrimaryKeyColumns
         {
             get;
             set;
