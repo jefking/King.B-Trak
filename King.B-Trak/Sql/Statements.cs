@@ -7,6 +7,11 @@
     {
         #region Members
         /// <summary>
+        /// Select Data Format String
+        /// </summary>
+        public const string SelectDataFormat = "SELECT * FROM [{0}].[{1}] WITH(NOLOCK);";
+
+        /// <summary>
         /// Schema
         /// </summary>
         public const string Schema = "dbo";
