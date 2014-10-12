@@ -18,12 +18,14 @@
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorArgumentsNull()
         {
             new Parameters(null);
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorArgumentsEmpty()
         {
             new Parameters(new string[] { });
