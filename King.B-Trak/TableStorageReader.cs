@@ -3,6 +3,7 @@
     using King.Azure.Data;
     using King.BTrak.Models;
     using Microsoft.WindowsAzure.Storage.Table;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -32,6 +33,15 @@
         /// <param name="tableName"></param>
         public TableStorageReader(IAzureStorageResources resources, string tableName)
         {
+            if (null == resources)
+            {
+                throw new ArgumentNullException("resources");
+            }
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                throw new ArgumentException("tableName");
+            }
+
             this.resources = resources;
             this.tableName = tableName;
         }

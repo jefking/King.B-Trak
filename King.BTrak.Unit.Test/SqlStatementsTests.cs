@@ -1,14 +1,26 @@
 ﻿namespace King.BTrak.Unit.Test
 {
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class SqlStatementsTests
     {
+        [Test]
+        public void Schema()
+        {
+            Assert.AreEqual("dbo", SqlStatements.Schema);
+        }
+
+        [Test]
+        public void CreateTable()
+        {
+            Assert.IsTrue(SqlStatements.CreateTable.Contains("CREATE TABLE"));
+        }
+
+        [Test]
+        public void CreateStoredProcedure()
+        {
+            Assert.IsTrue(SqlStatements.CreateStoredProcedure.Contains("CREATE PROCEDURE"));
+        }
     }
 }
