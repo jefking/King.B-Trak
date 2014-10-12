@@ -78,24 +78,30 @@
     }
     #endregion
 
+    #region ITableStorageReader
+    /// <summary>
+    /// Table Storage Reader Interface
+    /// </summary>
     public interface ITableStorageReader
     {
         #region Methods
         /// <summary>
-        /// 
+        /// Load Tables
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Tables</returns>
         IEnumerable<ITableStorage> Load();
 
         /// <summary>
-        /// 
+        /// Retrieve Data
         /// </summary>
-        /// <param name="tables"></param>
-        /// <returns></returns>
+        /// <param name="tables">Tables</param>
+        /// <returns>SQL Data</returns>
         Task<IEnumerable<SqlData>> Retrieve(IEnumerable<ITableStorage> tables);
         #endregion
     }
+    #endregion
 
+    #region ISqlDataWriter
     /// <summary>
     /// 
     /// </summary>
@@ -110,4 +116,5 @@
         Task Store(IEnumerable<SqlData> datas);
         #endregion
     }
+    #endregion
 }

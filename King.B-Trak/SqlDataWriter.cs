@@ -30,11 +30,6 @@
         protected readonly ISchemaReader reader = null;
 
         /// <summary>
-        /// SQL Connection
-        /// </summary>
-        protected readonly SqlConnection database = null;
-
-        /// <summary>
         /// Executor
         /// </summary>
         protected readonly IExecutor executor = null;
@@ -42,18 +37,21 @@
 
         #region Constructors
         /// <summary>
-        /// 
+        /// Default Constructor
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="reader"></param>
-        /// <param name="connectionString"></param>
         public SqlDataWriter(string tableName, ISchemaReader reader, string connectionString)
+            : this(tableName, reader, new Executor(new SqlConnection(connectionString)))
+        {
+        }
+
+        /// <summary>
+        /// MOckable Constructor
+        /// </summary>
+        public SqlDataWriter(string tableName, ISchemaReader reader, IExecutor executor)
         {
             this.tableName = tableName;
             this.reader = reader;
-            this.database = new SqlConnection(connectionString);
-            this.executor = new Executor(this.database);
-            this.database.Open();
+            this.executor = executor;
         }
         #endregion
 
@@ -73,9 +71,7 @@
                 Trace.TraceInformation("Creating table to load data into: '{0}'.", this.tableName);
 
                 var statement = string.Format(SqlStatements.CreateTable, SqlStatements.Schema, this.tableName);
-                var cmd = this.database.CreateCommand();
-                cmd.CommandText = statement;
-                return await cmd.ExecuteNonQueryAsync() == -1;
+                return await this.executor.NonQuery(statement) == -1;
             }
 
             return true;
@@ -96,9 +92,7 @@
                 Trace.TraceInformation("Creating stored procedure to load data into table: '{0}'.", this.tableName);
 
                 var statement = string.Format(SqlStatements.CreateStoredProcedure, SqlStatements.Schema, this.tableName);
-                var cmd = this.database.CreateCommand();
-                cmd.CommandText = statement;
-                return await cmd.ExecuteNonQueryAsync() == -1;
+                return await this.executor.NonQuery(statement) == -1;
             }
 
             return true;

@@ -39,9 +39,9 @@
 
         #region Methods
         /// <summary>
-        /// 
+        /// Load Tables
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Tables</returns>
         public IEnumerable<ITableStorage> Load()
         {
             return from t in this.resources.Tables()
@@ -50,10 +50,10 @@
         }
 
         /// <summary>
-        /// 
+        /// Retrieve Data
         /// </summary>
-        /// <param name="tables"></param>
-        /// <returns></returns>
+        /// <param name="tables">Tables</param>
+        /// <returns>SQL Data</returns>
         public async Task<IEnumerable<SqlData>> Retrieve(IEnumerable<ITableStorage> tables)
         {
             var datas = new List<SqlData>();
