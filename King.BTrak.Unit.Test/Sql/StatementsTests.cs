@@ -23,5 +23,11 @@
         {
             Assert.IsTrue(SqlStatements.CreateStoredProcedure.Contains("CREATE PROCEDURE"));
         }
+
+        [Test]
+        public void SelectDataFormat()
+        {
+            Assert.AreEqual("SELECT * FROM [{0}].[{1}] WITH(NOLOCK);", SqlStatements.SelectDataFormat);
+        }
     }
 }
