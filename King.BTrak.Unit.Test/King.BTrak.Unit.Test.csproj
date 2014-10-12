@@ -97,11 +97,18 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ParametersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\King.B-Trak\King.BTrak.Core.csproj">
+      <Project>{416ce6c0-da4d-44a4-9e98-a8b7a8b17f16}</Project>
+      <Name>King.BTrak.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

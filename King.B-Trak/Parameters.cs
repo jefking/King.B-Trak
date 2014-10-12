@@ -1,6 +1,7 @@
 ﻿namespace King.BTrak
 {
     using King.BTrak.Models;
+    using System;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Linq;
@@ -24,6 +25,15 @@
         /// <param name="arguments">Arguments</param>
         public Parameters(IReadOnlyList<string> arguments)
         {
+            if (null == arguments)
+            {
+                throw new ArgumentNullException("arguments");
+            }
+            if (!arguments.Any() || arguments.Count() != 2)
+            {
+                throw new ArgumentException("Invalid parameter count.");
+            }
+
             this.arguments = arguments;
         }
         #endregion
