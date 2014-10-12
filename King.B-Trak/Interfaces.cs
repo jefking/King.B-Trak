@@ -103,16 +103,16 @@
 
     #region ISqlDataWriter
     /// <summary>
-    /// 
+    /// SQL Data Writer Interface
     /// </summary>
     public interface ISqlDataWriter
     {
         #region Methods
         /// <summary>
-        /// 
+        /// Stores Data
         /// </summary>
-        /// <param name="datas"></param>
-        /// <returns></returns>
+        /// <param name="dataSet">Data Sets</param>
+        /// <returns>Task</returns>
         Task Store(IEnumerable<SqlData> datas);
         #endregion
     }

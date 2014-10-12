@@ -45,7 +45,7 @@
         }
 
         /// <summary>
-        /// MOckable Constructor
+        /// Mockable Constructor
         /// </summary>
         public SqlDataWriter(string tableName, ISchemaReader reader, IExecutor executor)
         {
@@ -57,9 +57,9 @@
 
         #region Methods
         /// <summary>
-        /// 
+        /// Create Table
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Ready</returns>
         public virtual async Task<bool> CreateTable()
         {
             var exists = (from t in await this.reader.Load(SchemaTypes.Table)
@@ -78,9 +78,9 @@
         }
 
         /// <summary>
-        /// 
+        /// Create Sproc
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Ready</returns>
         public virtual async Task<bool> CreateSproc()
         {
             var exists = (from t in await this.reader.Load(SchemaTypes.StoredProcedure)
@@ -101,11 +101,11 @@
 
         #region Methods
         /// <summary>
-        /// 
+        /// Stores Data
         /// </summary>
-        /// <param name="datas"></param>
-        /// <returns></returns>
-        public virtual async Task Store(IEnumerable<SqlData> datas)
+        /// <param name="dataSet">Data Sets</param>
+        /// <returns>Task</returns>
+        public virtual async Task Store(IEnumerable<SqlData> dataSet)
         {
             var created = await this.CreateTable();
             if (created)
@@ -113,7 +113,7 @@
                 created = await this.CreateSproc();
                 if (created)
                 {
-                    foreach (var data in datas)
+                    foreach (var data in dataSet)
                     {
                         foreach (var row in data.Rows)
                         {
