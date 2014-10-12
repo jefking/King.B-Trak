@@ -18,22 +18,22 @@
         /// <summary>
         /// Sql Data Loader
         /// </summary>
-        protected readonly ISqlDataLoader sqlDataLoader = null;
+        protected readonly ISqlDataLoader sqlReader = null;
 
         /// <summary>
         /// SQL Data Writer
         /// </summary>
-        protected readonly ISqlDataWriter sqlDataWriter = null;
+        protected readonly ISqlDataWriter sqlWriter = null;
 
         /// <summary>
         /// Azure Table Storage Writer
         /// </summary>
-        protected readonly ITableStorageWriter tableStorageWriter = null;
+        protected readonly ITableStorageWriter tableWriter = null;
 
         /// <summary>
         /// Table Storage Reader
         /// </summary>
-        protected readonly ITableStorageReader tableStorageReader = null;
+        protected readonly ITableStorageReader tableReader = null;
         #endregion
 
         #region Constructors
@@ -51,10 +51,19 @@
             var sqlSchemaReader = new SchemaReader(config.SqlConenction);
             var executor = new Executor(new SqlConnection(config.SqlConenction));
 
-            this.tableStorageWriter = new TableStorageWriter(new TableStorage(config.StorageTableName, config.StorageAccountConnection));
-            this.sqlDataLoader = new SqlDataReader(executor, sqlSchemaReader, config.SqlTableName);
-            this.tableStorageReader = new TableStorageReader(new AzureStorageResources(config.StorageAccountConnection), config.StorageTableName);
-            this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, sqlSchemaReader, executor);
+            switch (config.SyncDirection)
+            {
+                case Direction.TableToSql:
+                    this.tableReader = new TableStorageReader(new AzureStorageResources(config.StorageAccountConnection), config.StorageTableName);
+                    this.sqlWriter = new SqlDataWriter(sqlSchemaReader, executor, config.SqlTableName);
+                    break;
+                case Direction.SqlToTable:
+                    this.sqlReader = new SqlDataReader(executor, sqlSchemaReader, config.SqlTableName);
+                    this.tableWriter = new TableStorageWriter(new TableStorage(config.StorageTableName, config.StorageAccountConnection));
+                    break;
+                default:
+                    throw new ArgumentException("Invalid Direction.");
+            }
         }
         #endregion
 
@@ -74,25 +83,25 @@
                     from = "SQL Server";
                     to = "Table Storage";
                     Trace.TraceInformation("Loading schema from {0}.", from);
-                    var sqlSchema = await this.sqlDataLoader.Load();
+                    var sqlSchema = await this.sqlReader.Load();
 
                     Trace.TraceInformation("Loading data from {0}.", from);
-                    var sqlData = await this.sqlDataLoader.Retrieve(sqlSchema);
+                    var sqlData = await this.sqlReader.Retrieve(sqlSchema);
 
                     Trace.TraceInformation("Storing data to {0}.", to);
-                    await this.tableStorageWriter.Store(sqlData);
+                    await this.tableWriter.Store(sqlData);
                     break;
                 case Direction.TableToSql:
                     from = "Table Storage";
                     to = "SQL Server";
                     Trace.TraceInformation("Loading schema from {0}.", from);
-                    var tableSchema = this.tableStorageReader.Load();
+                    var tableSchema = this.tableReader.Load();
 
                     Trace.TraceInformation("Loading data {0}.", from);
-                    var tableData = await this.tableStorageReader.Retrieve(tableSchema);
+                    var tableData = await this.tableReader.Retrieve(tableSchema);
 
                     Trace.TraceInformation("Storing data to {0}.", to);
-                    await this.sqlDataWriter.Store(tableData);
+                    await this.sqlWriter.Store(tableData);
                     break;
                 default:
                     throw new InvalidOperationException("Unknown sync direction.");

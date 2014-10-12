@@ -39,12 +39,8 @@
         /// <summary>
         /// Mockable Constructor
         /// </summary>
-        public SqlDataWriter(string tableName, ISchemaReader reader, IExecutor executor)
+        public SqlDataWriter(ISchemaReader reader, IExecutor executor, string tableName)
         {
-            if (string.IsNullOrWhiteSpace(tableName))
-            {
-                throw new ArgumentException("tableName");
-            }
             if (null == reader)
             {
                 throw new ArgumentNullException("reader");
@@ -53,10 +49,14 @@
             {
                 throw new ArgumentNullException("executor");
             }
+            if (string.IsNullOrWhiteSpace(tableName))
+            {
+                throw new ArgumentException("tableName");
+            }
 
-            this.tableName = tableName;
             this.reader = reader;
             this.executor = executor;
+            this.tableName = tableName;
         }
         #endregion
 
