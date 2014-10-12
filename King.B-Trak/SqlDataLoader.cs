@@ -32,14 +32,18 @@
         /// Schema Reader
         /// </summary>
         protected readonly ISchemaReader sqlSchemaReader = null;
+
+        /// <summary>
+        /// SQL Table Name
+        /// </summary>
+        private readonly string sqlTableName = null;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Default Constructor
         /// </summary>
-        /// <param name="database"></param>
-        public SqlDataLoader(SqlConnection database, ISchemaReader schemaReader)
+        public SqlDataLoader(SqlConnection database, ISchemaReader schemaReader, string sqlTableName)
         {
             if (null == database)
             {
@@ -48,6 +52,7 @@
 
             this.database = database;
             this.sqlSchemaReader = schemaReader;
+            this.sqlTableName = sqlTableName;
         }
         #endregion
 
@@ -60,7 +65,7 @@
         {
             return from t in await this.sqlSchemaReader.Load(SchemaTypes.Table)
                    where t.Preface != SqlStatements.Schema
-                        && t.Name != "TableData"
+                        && t.Name != this.sqlTableName
                    select t;
         }
 

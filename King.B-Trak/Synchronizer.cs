@@ -50,7 +50,7 @@
             var sqlSchemaReader = new SchemaReader(config.SqlConenction);
 
             this.tableStorageWriter = new TableStorageWriter(new TableStorage(config.StorageTableName, config.StorageAccountConnection));
-            this.sqlDataLoader = new SqlDataLoader(new SqlConnection(config.SqlConenction), sqlSchemaReader);
+            this.sqlDataLoader = new SqlDataLoader(new SqlConnection(config.SqlConenction), sqlSchemaReader, config.SqlTableName);
             this.tableStorageReader = new TableStorageReader(new AzureStorageResources(config.StorageAccountConnection), config.StorageTableName);
             this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, sqlSchemaReader, config.SqlConenction);
         }
