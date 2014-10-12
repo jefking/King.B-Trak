@@ -20,7 +20,7 @@
 
         #region Constructors
         /// <summary>
-        /// Parameters
+        /// Default Constructor
         /// </summary>
         /// <param name="arguments">Arguments</param>
         public Parameters(IReadOnlyList<string> arguments)

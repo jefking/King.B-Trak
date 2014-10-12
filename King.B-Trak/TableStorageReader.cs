@@ -27,10 +27,10 @@
 
         #region Constructors
         /// <summary>
-        /// 
+        /// Default Constructor
         /// </summary>
-        /// <param name="resources"></param>
-        /// <param name="tableName"></param>
+        /// <param name="resources">Azure Storage Resources</param>
+        /// <param name="tableName">Table Name</param>
         public TableStorageReader(IAzureStorageResources resources, string tableName)
         {
             if (null == resources)

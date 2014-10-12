@@ -38,7 +38,7 @@
 
         #region Constructors
         /// <summary>
-        /// Constructor
+        /// Default Constructor
         /// </summary>
         /// <param name="config">Configuration Values</param>
         public Synchronizer(IConfigValues config)

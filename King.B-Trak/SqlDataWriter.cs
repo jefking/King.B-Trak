@@ -37,7 +37,7 @@
 
         #region Constructors
         /// <summary>
-        /// Mockable Constructor
+        /// Default Constructor
         /// </summary>
         public SqlDataWriter(ISchemaReader reader, IExecutor executor, string tableName)
         {

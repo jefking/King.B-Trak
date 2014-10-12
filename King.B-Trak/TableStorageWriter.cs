@@ -21,7 +21,7 @@
 
         #region Constructors
         /// <summary>
-        /// Mockable Constructor
+        /// Default Constructor
         /// </summary>
         /// <param name="table">Table Storage</param>
         public TableStorageWriter(ITableStorage table)
