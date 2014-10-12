@@ -91,14 +91,14 @@
 
                 var data = new TableData
                 {
-                    Data = this.loader.Dictionaries(ds),
-                    Name = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),
+                    Rows = this.loader.Dictionaries(ds),
+                    TableName = string.Format("[{0}].[{1}]", schema.Preface, schema.Name),
                     PrimaryKeyColumns = from v in schema.Variables
                           where v.IsPrimaryKey
                           select v.ParameterName,
                 };
                 tables.Add(data);
-                Trace.TraceInformation("Rows Read: {0}", data.Data.Count());
+                Trace.TraceInformation("Rows Read: {0}", data.Rows.Count());
             }
 
             return tables;

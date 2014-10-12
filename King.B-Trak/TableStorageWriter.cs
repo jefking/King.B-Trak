@@ -55,9 +55,9 @@
             foreach (var tableData in tables)
             {
                 var hasPk = null != tableData.PrimaryKeyColumns && tableData.PrimaryKeyColumns.Any();
-                foreach (var entity in tableData.Data)
+                foreach (var entity in tableData.Rows)
                 {
-                    entity.Add(TableStorage.PartitionKey, tableData.Name);
+                    entity.Add(TableStorage.PartitionKey, tableData.TableName);
 
                     var rowKey = string.Empty;
                     if (hasPk)

@@ -11,16 +11,16 @@
         /// <summary>
         /// Row Data
         /// </summary>
-        public virtual IEnumerable<IDictionary<string, object>> Data
+        public virtual IEnumerable<IDictionary<string, object>> Rows
         {
             get;
             set;
         }
 
         /// <summary>
-        /// Name
+        /// Table Name
         /// </summary>
-        public virtual string Name
+        public virtual string TableName
         {
             get;
             set;
