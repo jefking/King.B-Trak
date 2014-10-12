@@ -113,7 +113,6 @@
                         var sproc = row.Map<SaveData>();
                         sproc.TableName = dataSet.TableName;
                         sproc.Id = Guid.NewGuid();
-
                         sproc.Data = string.Format("<data>{0}</data>",
                             string.Concat(
                                             from k in row.Keys

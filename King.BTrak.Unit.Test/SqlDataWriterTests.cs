@@ -1,5 +1,6 @@
 ﻿namespace King.BTrak.Unit.Test
 {
+    using King.BTrak.Models;
     using King.BTrak.Sql;
     using King.Data.Sql.Reflection;
     using King.Data.Sql.Reflection.Models;
@@ -131,6 +132,39 @@
             reader.Received().Load(SchemaTypes.StoredProcedure);
             executor.Received().NonQuery(tableStatement);
             executor.Received().NonQuery(sprocStatement);
+        }
+
+        [Test]
+        public async Task Store()
+        {
+            var tableName = Guid.NewGuid().ToString();
+            var tableStatement = string.Format(SqlStatements.CreateTable, SqlStatements.Schema, tableName);
+            var sprocStatement = string.Format(SqlStatements.CreateStoredProcedure, SqlStatements.Schema, tableName);
+            var rows = new List<IDictionary<string, object>>();
+            rows.Add(new Dictionary<string, object>());
+            var data = new TableData()
+            {
+                TableName = Guid.NewGuid().ToString(),
+                Rows = rows,
+            };
+            var dataSets = new List<TableData>();
+            dataSets.Add(data);
+            var reader = Substitute.For<ISchemaReader>();
+            reader.Load(SchemaTypes.Table).Returns(Task.FromResult<IEnumerable<IDefinition>>(new List<IDefinition>()));
+            reader.Load(SchemaTypes.StoredProcedure).Returns(Task.FromResult<IEnumerable<IDefinition>>(new List<IDefinition>()));
+            var executor = Substitute.For<IExecutor>();
+            executor.NonQuery(tableStatement).Returns(Task.FromResult(-1));
+            executor.NonQuery(sprocStatement).Returns(Task.FromResult(-1));
+            executor.NonQuery(Arg.Any<SaveData>());
+
+            var writer = new SqlDataWriter(reader, executor, tableName);
+            await writer.Store(dataSets);
+
+            reader.Received().Load(SchemaTypes.Table);
+            reader.Received().Load(SchemaTypes.StoredProcedure);
+            executor.Received().NonQuery(tableStatement);
+            executor.Received().NonQuery(sprocStatement);
+            executor.Received().NonQuery(Arg.Any<SaveData>());
         }
     }
 }
