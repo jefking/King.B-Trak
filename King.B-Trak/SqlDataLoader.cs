@@ -58,7 +58,10 @@
         /// <returns>Schema</returns>
         public async Task<IEnumerable<IDefinition>> Load()
         {
-            return await this.sqlSchemaReader.Load(SchemaTypes.Table);
+            return from t in await this.sqlSchemaReader.Load(SchemaTypes.Table)
+                   where t.Preface != SqlStatements.Schema
+                        && t.Name != "TableData"
+                   select t;
         }
 
         /// <summary>
