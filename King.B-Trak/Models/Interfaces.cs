@@ -1,6 +1,5 @@
 ﻿namespace King.BTrak.Models
 {
-
     #region IConfigValues
     /// <summary>
     /// Configuration Values
@@ -9,7 +8,7 @@
     {
         #region Properties
         /// <summary>
-        /// 
+        /// SQL Conenction String
         /// </summary>
         string SqlConenction
         {
@@ -17,7 +16,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Storage Account Connection String
         /// </summary>
         string StorageAccountConnection
         {
