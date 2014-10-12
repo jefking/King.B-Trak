@@ -49,7 +49,7 @@
         {
             get
             {
-                return Direction.TableToSql;
+                return Direction.SqlToTable;
             }
         }
         #endregion
