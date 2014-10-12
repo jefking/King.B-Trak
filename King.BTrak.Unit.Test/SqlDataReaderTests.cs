@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
 
     [TestFixture]
-    public class SqlDataLoaderTests
+    public class SqlDataReaderTests
     {
     }
 }

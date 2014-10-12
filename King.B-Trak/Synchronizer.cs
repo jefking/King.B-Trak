@@ -3,6 +3,7 @@
     using King.Azure.Data;
     using King.BTrak.Models;
     using King.Data.Sql.Reflection;
+    using King.Mapper.Data;
     using System;
     using System.Data.SqlClient;
     using System.Diagnostics;
@@ -50,7 +51,7 @@
             var sqlSchemaReader = new SchemaReader(config.SqlConenction);
 
             this.tableStorageWriter = new TableStorageWriter(new TableStorage(config.StorageTableName, config.StorageAccountConnection));
-            this.sqlDataLoader = new SqlDataLoader(new SqlConnection(config.SqlConenction), sqlSchemaReader, config.SqlTableName);
+            this.sqlDataLoader = new SqlDataReader(new Executor(new SqlConnection(config.SqlConenction)), sqlSchemaReader, config.SqlTableName);
             this.tableStorageReader = new TableStorageReader(new AzureStorageResources(config.StorageAccountConnection), config.StorageTableName);
             this.sqlDataWriter = new SqlDataWriter(config.SqlTableName, sqlSchemaReader, config.SqlConenction);
         }

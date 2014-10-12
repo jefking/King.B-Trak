@@ -103,7 +103,7 @@
     <Compile Include="Models\TableDataTests.cs" />
     <Compile Include="ParametersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlDataLoaderTests.cs" />
+    <Compile Include="SqlDataReaderTests.cs" />
     <Compile Include="SqlDataWriterTests.cs" />
     <Compile Include="SqlStatementsTests.cs" />
     <Compile Include="SynchronizerTests.cs" />

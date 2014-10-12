@@ -15,13 +15,13 @@
     /// <summary>
     /// SQL Data Loader
     /// </summary>
-    public class SqlDataLoader : ISqlDataLoader
+    public class SqlDataReader : ISqlDataLoader
     {
         #region Members
         /// <summary>
-        /// SQL Connection
+        /// SQL Executor
         /// </summary>
-        protected readonly SqlConnection database = null;
+        protected readonly IExecutor executor = null;
 
         /// <summary>
         /// Dynamic Loader
@@ -43,11 +43,11 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public SqlDataLoader(SqlConnection database, ISchemaReader schemaReader, string sqlTableName)
+        public SqlDataReader(IExecutor executor, ISchemaReader schemaReader, string sqlTableName)
         {
-            if (null == database)
+            if (null == executor)
             {
-                throw new ArgumentNullException("database");
+                throw new ArgumentNullException("executor");
             }
             if (null == schemaReader)
             {
@@ -58,7 +58,7 @@
                 throw new ArgumentException("sqlTableName");
             }
 
-            this.database = database;
+            this.executor = executor;
             this.sqlSchemaReader = schemaReader;
             this.sqlTableName = sqlTableName;
         }
@@ -84,13 +84,12 @@
         public virtual async Task<IEnumerable<TableSqlData>> Retrieve(IEnumerable<IDefinition> schemas)
         {
             var tables = new List<TableSqlData>();
-            var executor = new Executor(this.database);
             foreach (var schema in schemas)
             {
                 var sql = string.Format("SELECT * FROM [{0}].[{1}] WITH(NOLOCK);", schema.Preface, schema.Name);
                 Trace.TraceInformation(sql);
 
-                var ds = await executor.Query(sql);
+                var ds = await this.executor.Query(sql);
 
                 var data = new TableSqlData
                 {
@@ -101,6 +100,7 @@
                           select v.ParameterName,
                 };
                 tables.Add(data);
+
                 Trace.TraceInformation("Rows Read: {0}", data.Rows.Count());
             }
 
