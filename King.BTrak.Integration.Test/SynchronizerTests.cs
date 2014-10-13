@@ -78,6 +78,11 @@
             await s.Run(c.SyncDirection);
 
             await executor.NonQuery("TRUNCATE TABLE [dbo].[TestSqlToTable]");
+
+            var table = new TableStorage(c.StorageTableName, c.StorageAccountConnection);
+            var e = await table.QueryByPartitionAndRow("[dbo].[TestSqlToTable]", id.ToString());
+            Assert.IsNotNull(e);
+            Assert.AreEqual(data, e["Data"]);
         }
     }
 }

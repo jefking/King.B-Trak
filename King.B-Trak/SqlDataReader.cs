@@ -76,7 +76,7 @@
         public async Task<IEnumerable<IDefinition>> Load()
         {
             return from t in await this.sqlSchemaReader.Load(SchemaTypes.Table)
-                   where t.Preface != SqlStatements.Schema && t.Name != this.sqlTableName
+                   where t.Preface != SqlStatements.Schema || t.Name != this.sqlTableName
                    select t;
         }
 
