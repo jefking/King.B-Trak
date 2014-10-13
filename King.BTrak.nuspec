@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-    <metadata>
-        <id>King.BTrak</id>
-        <version>0.4.0</version>
-        <title>King.B-Trak</title>
-        <authors>Jef King</authors>
-        <owners>Jef King</owners>
-        <licenseUrl>https://github.com/jefking/King.B-Trak/blob/master/LICENSE</licenseUrl>
-        <projectUrl>https://github.com/jefking/King.B-Trak</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/jefking/King.B-Trak/master/icon.png</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Synchronize data between SQL Server and Azure Table Storage.</description>
-        <summary>Synchronize data between SQL Server and Azure Table Storage.</summary>
-        <releaseNotes>Beta Release: Manual and Unit tested, add to your solultion as a library.</releaseNotes>
-        <copyright>Jef King</copyright>
-        <language>en-US</language>
-        <tags>King.BTrak Azure SQL Server SQL-Server Synchronize Synchronization NoSQL structured-query-language query row rows data sync table-storage tables Data-Sync Table Azure-Storage Storage Account Storage-Account</tags>
-      <dependencies>
-        <dependency id="WindowsAzure.Storage" />
-        <dependency id="King.Data.Sql.Reflection" />
-        <dependency id="King.Azure" />
-      </dependencies>
-      <frameworkAssemblies>
-        <frameworkAssembly assemblyName="System" targetFramework="net451" />
-        <frameworkAssembly assemblyName="System.Configuration" targetFramework="net451" />
-        <frameworkAssembly assemblyName="System.Xml" targetFramework="net451" />
-      </frameworkAssemblies>
-    </metadata>
-    <files>
-      <file src="King.B-Trak\bin\Release\King.BTrak.dll" target="lib\net451\King.BTrak.dll" />
-    </files>
+  <metadata>
+    <id>King.BTrak</id>
+    <version>0.4.0</version>
+    <title>King.B-Trak</title>
+    <authors>Jef King</authors>
+    <owners>Jef King</owners>
+    <licenseUrl>https://github.com/jefking/King.B-Trak/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jefking/King.B-Trak</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/jefking/King.B-Trak/master/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Synchronize data between SQL Server and Azure Table Storage.</description>
+    <summary>Synchronize data between SQL Server and Azure Table Storage.</summary>
+    <releaseNotes>Beta Release: Manual and Unit tested, add to your solultion as a library.</releaseNotes>
+    <copyright>Jef King</copyright>
+    <language>en-US</language>
+    <tags>King.BTrak Azure SQL Server SQL-Server Synchronize Synchronization NoSQL structured-query-language query row rows data sync table-storage tables Data-Sync Table Azure-Storage Storage Account Storage-Account</tags>
+    <dependencies>
+      <dependency id="WindowsAzure.Storage" />
+      <dependency id="King.Data.Sql.Reflection" />
+      <dependency id="King.Azure" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="net451" />
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework="net451" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="net451" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="King.B-Trak\bin\Release\King.BTrak.dll" target="lib\net451\King.BTrak.dll" />
+  </files>
 </package>
