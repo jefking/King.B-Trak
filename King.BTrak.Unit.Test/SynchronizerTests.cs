@@ -8,7 +8,7 @@
     public class SynchronizerTests
     {
         [Test]
-        public void Constructor()
+        public void ConstructorTableToSql()
         {
             var c = new ConfigValues()
             {
@@ -17,6 +17,21 @@
                 SqlTableName = "tabletable",
                 StorageTableName = "tabletable",
                 SyncDirection = Direction.TableToSql,
+            };
+
+            new Synchronizer(c);
+        }
+
+        [Test]
+        public void Constructor()
+        {
+            var c = new ConfigValues()
+            {
+                StorageAccountConnection = "UseDevelopmentStorage=true;",
+                SqlConenction = "Server=server;Database=database;Trusted_Connection=True;",
+                SqlTableName = "tabletable",
+                StorageTableName = "tabletable",
+                SyncDirection = Direction.SqlToTable,
             };
 
             new Synchronizer(c);
