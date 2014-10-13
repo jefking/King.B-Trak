@@ -119,11 +119,13 @@
             var tableName = Guid.NewGuid().ToString();
             var random = new Random();
             var definitions = new List<IDefinition>();
+            var variables = new List<IVariable>();
+            variables.Add(new Variable() { IsPrimaryKey = true, ParameterName = Guid.NewGuid().ToString() });
             var def = new Definition()
             {
                 Name = Guid.NewGuid().ToString(),
                 Preface = Guid.NewGuid().ToString(),
-                Variables = new List<IVariable>(),
+                Variables = variables,
             };
             definitions.Add(def);
 
