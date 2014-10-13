@@ -43,5 +43,20 @@
         {
             new Synchronizer(null);
         }
+
+        [Test]
+        public void IsISynchronizer()
+        {
+            var c = new ConfigValues()
+            {
+                StorageAccountConnection = "UseDevelopmentStorage=true;",
+                SqlConenction = "Server=server;Database=database;Trusted_Connection=True;",
+                SqlTableName = "tabletable",
+                StorageTableName = "tabletable",
+                SyncDirection = Direction.SqlToTable,
+            };
+
+            Assert.IsNotNull(new Synchronizer(c) as ISynchronizer);
+        }
     }
 }
