@@ -23,7 +23,7 @@
         }
 
         [Test]
-        public void Constructor()
+        public void ConstructorSqlToTable()
         {
             var c = new ConfigValues()
             {
