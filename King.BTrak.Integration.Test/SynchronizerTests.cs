@@ -68,8 +68,16 @@
                 SyncDirection = Direction.SqlToTable,
             };
 
+            var id = Guid.NewGuid();
+            var data = Guid.NewGuid();
+            var statement = string.Format("INSERT INTO [dbo].[TestSqlToTable] ([Id], [Data]) VALUES ('{0}', '{1}');", id, data);
+            var executor = new Executor(new SqlConnection(c.SqlConenction));
+            await executor.NonQuery(statement);
+
             var s = new Synchronizer(c);
             await s.Run(c.SyncDirection);
+
+            await executor.NonQuery("TRUNCATE TABLE [dbo].[TestSqlToTable]");
         }
     }
 }

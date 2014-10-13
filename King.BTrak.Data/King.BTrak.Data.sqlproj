@@ -65,5 +65,6 @@
   <ItemGroup>
     <Build Include="Tables\TestDataOne.sql" />
     <Build Include="Tables\MultipleKeys.sql" />
+    <Build Include="Tables\TestSqlToTable.sql" />
   </ItemGroup>
 </Project>
