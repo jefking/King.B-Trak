@@ -96,7 +96,6 @@
     <Compile Include="Sql\SaveData.cs" />
     <Compile Include="Models\TableStorageData.cs" />
     <Compile Include="Models\TableData.cs" />
-    <Compile Include="Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sql\StoredProcedures.Generated.cs" />
     <Compile Include="SqlDataReader.cs" />
