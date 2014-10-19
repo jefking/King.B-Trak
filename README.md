@@ -10,5 +10,5 @@ PM> Install-Package King.BTrak
 ### [Wiki](https://github.com/jefking/King.B-Trak/wiki)
 View the wiki to learn how to use this.
 
-### [Example](https://github.com/jefking/King.Service/tree/master/Azure.Demo)
+### [Example](https://github.com/jefking/King.B-Trak/tree/master/King.BTrak.Program)
 Clone the repository to play with the demo!
