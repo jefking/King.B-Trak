@@ -1,7 +1,4 @@
-BETA Release
-===========
-
-Synchronize Between SQL Server and Azure Table Storage;
+Synchronize Between SQL Server and Azure Table Storage
 + Move data from SQL Server to Table Storage
 + Move data from Table Storage to SQL Server
 
