@@ -9,7 +9,7 @@
         /// <summary>
         /// SQL Conenction String
         /// </summary>
-        public virtual string SqlConenction
+        public virtual string SqlConnection
         {
             get;
             set;

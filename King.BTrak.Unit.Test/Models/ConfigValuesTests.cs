@@ -25,10 +25,10 @@
             var expected = Guid.NewGuid().ToString();
             var c = new ConfigValues
             {
-                SqlConenction = expected,
+                SqlConnection = expected,
             };
 
-            Assert.AreEqual(expected, c.SqlConenction);
+            Assert.AreEqual(expected, c.SqlConnection);
         }
 
         [Test]

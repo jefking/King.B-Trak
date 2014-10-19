@@ -27,7 +27,7 @@
             var c = new ConfigValues()
             {
                 StorageAccountConnection = "UseDevelopmentStorage=true;",
-                SqlConenction = "Server=localhost;Database=King.BTrak.Data;Trusted_Connection=True;",
+                SqlConnection = "Server=localhost;Database=King.BTrak.Data;Trusted_Connection=True;",
                 SqlTableName = "TableData",
                 StorageTableName = "sqlserverdata",
                 SyncDirection = Direction.TableToSql,
@@ -49,7 +49,7 @@
             await table.Delete();
 
             var statement = string.Format("SELECT 1 AS [Exists] FROM [dbo].[TableData] WHERE TableName='{0}' AND PartitionKey = '{1}' AND RowKey = '{2}';", tableName, entity.PartitionKey, entity.RowKey);
-            var executor = new Executor(new SqlConnection(c.SqlConenction));
+            var executor = new Executor(new SqlConnection(c.SqlConnection));
             var ds = await executor.Query(statement);
             var r = ds.Model<DataRow>();
             Assert.IsNotNull(r);
@@ -62,7 +62,7 @@
             var c = new ConfigValues()
             {
                 StorageAccountConnection = "UseDevelopmentStorage=true;",
-                SqlConenction = "Server=localhost;Database=King.BTrak.Data;Trusted_Connection=True;",
+                SqlConnection = "Server=localhost;Database=King.BTrak.Data;Trusted_Connection=True;",
                 SqlTableName = "TableData",
                 StorageTableName = "sqlserverdata",
                 SyncDirection = Direction.SqlToTable,
@@ -71,7 +71,7 @@
             var id = Guid.NewGuid();
             var data = Guid.NewGuid();
             var statement = string.Format("INSERT INTO [dbo].[TestSqlToTable] ([Id], [Data]) VALUES ('{0}', '{1}');", id, data);
-            var executor = new Executor(new SqlConnection(c.SqlConenction));
+            var executor = new Executor(new SqlConnection(c.SqlConnection));
             await executor.NonQuery(statement);
 
             var s = new Synchronizer(c);

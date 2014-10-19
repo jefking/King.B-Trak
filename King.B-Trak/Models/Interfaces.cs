@@ -10,7 +10,7 @@
         /// <summary>
         /// SQL Conenction String
         /// </summary>
-        string SqlConenction
+        string SqlConnection
         {
             get;
         }

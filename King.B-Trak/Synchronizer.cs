@@ -48,8 +48,8 @@
                 throw new ArgumentNullException("config");
             }
 
-            var sqlSchemaReader = new SchemaReader(config.SqlConenction);
-            var executor = new Executor(new SqlConnection(config.SqlConenction));
+            var sqlSchemaReader = new SchemaReader(config.SqlConnection);
+            var executor = new Executor(new SqlConnection(config.SqlConnection));
 
             switch (config.SyncDirection)
             {

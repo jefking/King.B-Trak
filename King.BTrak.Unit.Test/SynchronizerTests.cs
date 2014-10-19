@@ -13,7 +13,7 @@
             var c = new ConfigValues()
             {
                 StorageAccountConnection = "UseDevelopmentStorage=true;",
-                SqlConenction = "Server=server;Database=database;Trusted_Connection=True;",
+                SqlConnection = "Server=server;Database=database;Trusted_Connection=True;",
                 SqlTableName = "tabletable",
                 StorageTableName = "tabletable",
                 SyncDirection = Direction.TableToSql,
@@ -28,7 +28,7 @@
             var c = new ConfigValues()
             {
                 StorageAccountConnection = "UseDevelopmentStorage=true;",
-                SqlConenction = "Server=server;Database=database;Trusted_Connection=True;",
+                SqlConnection = "Server=server;Database=database;Trusted_Connection=True;",
                 SqlTableName = "tabletable",
                 StorageTableName = "tabletable",
                 SyncDirection = Direction.SqlToTable,
@@ -50,7 +50,7 @@
             var c = new ConfigValues()
             {
                 StorageAccountConnection = "UseDevelopmentStorage=true;",
-                SqlConenction = "Server=server;Database=database;Trusted_Connection=True;",
+                SqlConnection = "Server=server;Database=database;Trusted_Connection=True;",
                 SqlTableName = "tabletable",
                 StorageTableName = "tabletable",
                 SyncDirection = Direction.SqlToTable,
