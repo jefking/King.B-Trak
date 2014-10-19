@@ -11,6 +11,9 @@ Synchronize Between SQL Server and Azure Table Storage;
 PM> Install-Package King.BTrak
 ```
 
+### [Wiki](https://github.com/jefking/King.B-Trak/wiki)
+View the wiki to learn how to use this.
+
 ## Getting Started
 * Clone the repository
 * Run the B-Trak.csproj file in Visual Studio
