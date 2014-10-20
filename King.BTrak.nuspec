@@ -10,8 +10,8 @@
     <projectUrl>https://github.com/jefking/King.B-Trak</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/jefking/King.B-Trak/master/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Synchronize data between SQL Server and Azure Table Storage.</description>
-    <summary>Synchronize data between SQL Server and Azure Table Storage.</summary>
+    <description>Synchronize Between SQL Server and Azure Table Storage</description>
+    <summary>Synchronize Between SQL Server and Azure Table Storage</summary>
     <releaseNotes>First release, supports bi-directional sync'ing of SQL Server and Table Storage!</releaseNotes>
     <copyright>Jef King</copyright>
     <language>en-US</language>
