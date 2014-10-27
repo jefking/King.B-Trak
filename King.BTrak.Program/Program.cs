@@ -24,7 +24,7 @@
                 var config = parameters.Process();
 
                 Trace.TraceInformation("SQL Server Connection String: '{0}'{3}{3}Storage Account: '{1}'{3}Table Name: '{2}'{3}"
-                    , config.SqlConenction
+                    , config.SqlConnection
                     , config.StorageAccountConnection
                     , config.StorageTableName
                     , Environment.NewLine);
