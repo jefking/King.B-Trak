@@ -44,7 +44,7 @@
             await table.InsertOrReplace(entity);
 
             var s = new Synchronizer(c);
-            await s.Run(c.SyncDirection);
+            await s.Run();
 
             await table.Delete();
 
@@ -75,7 +75,7 @@
             await executor.NonQuery(statement);
 
             var s = new Synchronizer(c);
-            await s.Run(c.SyncDirection);
+            await s.Run();
 
             await executor.NonQuery("TRUNCATE TABLE [dbo].[TestSqlToTable]");
 

@@ -34,6 +34,11 @@
         /// Table Storage Reader
         /// </summary>
         protected readonly ITableStorageReader tableReader = null;
+
+        /// <summary>
+        /// Synchronization Direction
+        /// </summary>
+        protected readonly Direction direction = Direction.Unknown;
         #endregion
 
         #region Constructors
@@ -50,6 +55,7 @@
 
             var sqlSchemaReader = new SchemaReader(config.SqlConnection);
             var executor = new Executor(new SqlConnection(config.SqlConnection));
+            this.direction = config.SyncDirection;
 
             switch (config.SyncDirection)
             {
@@ -71,13 +77,12 @@
         /// <summary>
         /// Run Synchronization
         /// </summary>
-        /// <param name="direction">Direction</param>
         /// <returns>Task</returns>
-        public virtual async Task Run(Direction direction)
+        public virtual async Task Run()
         {
             var from = string.Empty;
             var to = string.Empty;
-            switch (direction)
+            switch (this.direction)
             {
                 case Direction.SqlToTable:
                     from = "SQL Server";
@@ -103,8 +108,6 @@
                     Trace.TraceInformation("Storing data to {0}.", to);
                     await this.sqlWriter.Store(tableData);
                     break;
-                default:
-                    throw new InvalidOperationException("Unknown sync direction.");
             }
         }
         #endregion

@@ -32,9 +32,8 @@
         /// <summary>
         /// Run Synchronization
         /// </summary>
-        /// <param name="direction">Direction</param>
         /// <returns>Task</returns>
-        Task Run(Direction direction);
+        Task Run();
         #endregion
     }
     #endregion
