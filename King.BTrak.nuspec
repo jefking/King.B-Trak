@@ -15,9 +15,8 @@
     <releaseNotes>First release, supports bi-directional sync'ing of SQL Server and Table Storage!</releaseNotes>
     <copyright>Jef King</copyright>
     <language>en-US</language>
-    <tags>King.BTrak Azure SQL Server SQL-Server Synchronize Synchronization NoSQL structured-query-language query row rows data sync table-storage tables Data-Sync Table Azure-Storage Storage Account Storage-Account</tags>
+    <tags>King.BTrak Azure SQL Server SQL-Server Synchronize Synchronization NoSQL structured-query-language entities entity query row rows data sync table-storage tables Data-Sync Table Azure-Storage Storage Account Storage-Account King.Azure</tags>
     <dependencies>
-      <dependency id="WindowsAzure.Storage" />
       <dependency id="King.Data.Sql.Reflection" />
       <dependency id="King.Azure" />
     </dependencies>

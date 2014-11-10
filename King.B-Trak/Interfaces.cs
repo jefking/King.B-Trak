@@ -57,7 +57,7 @@
 
     #region ISqlDataLoader
     /// <summary>
-    /// 
+    /// SQL Data Loader
     /// </summary>
     public interface ISqlDataLoader
     {

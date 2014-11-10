@@ -64,7 +64,7 @@
         /// Retrieve Data
         /// </summary>
         /// <param name="tables">Tables</param>
-        /// <returns>SQL Data</returns>
+        /// <returns>Table Data</returns>
         public async Task<IEnumerable<TableData>> Retrieve(IEnumerable<ITableStorage> tables)
         {
             var datas = new List<TableData>();
