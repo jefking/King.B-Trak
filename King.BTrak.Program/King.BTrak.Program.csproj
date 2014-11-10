@@ -61,7 +61,7 @@
     </Reference>
     <Reference Include="King.BTrak, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\King.BTrak.0.5.2\lib\net451\King.BTrak.dll</HintPath>
+      <HintPath>..\packages\King.BTrak.0.5.3\lib\net451\King.BTrak.dll</HintPath>
     </Reference>
     <Reference Include="King.Data.Sql.Reflection, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
