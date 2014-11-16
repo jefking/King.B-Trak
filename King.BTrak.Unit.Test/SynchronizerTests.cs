@@ -16,7 +16,7 @@
                 SqlConnection = "Server=server;Database=database;Trusted_Connection=True;",
                 SqlTableName = "tabletable",
                 StorageTableName = "tabletable",
-                SyncDirection = Direction.TableToSql,
+                Direction = Direction.TableToSql,
             };
 
             new Synchronizer(c);
@@ -31,7 +31,7 @@
                 SqlConnection = "Server=server;Database=database;Trusted_Connection=True;",
                 SqlTableName = "tabletable",
                 StorageTableName = "tabletable",
-                SyncDirection = Direction.SqlToTable,
+                Direction = Direction.SqlToTable,
             };
 
             new Synchronizer(c);
@@ -53,7 +53,7 @@
                 SqlConnection = "Server=server;Database=database;Trusted_Connection=True;",
                 SqlTableName = "tabletable",
                 StorageTableName = "tabletable",
-                SyncDirection = Direction.SqlToTable,
+                Direction = Direction.SqlToTable,
             };
 
             Assert.IsNotNull(new Synchronizer(c) as ISynchronizer);

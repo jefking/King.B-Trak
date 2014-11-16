@@ -42,7 +42,7 @@
         /// <summary>
         /// Sync Direction
         /// </summary>
-        Direction SyncDirection
+        Direction Direction
         {
             get;
         }

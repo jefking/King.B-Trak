@@ -30,7 +30,7 @@
                 SqlConnection = "Server=localhost;Database=King.BTrak.Data;Trusted_Connection=True;",
                 SqlTableName = "TableData",
                 StorageTableName = "sqlserverdata",
-                SyncDirection = Direction.TableToSql,
+                Direction = Direction.TableToSql,
             };
 
             var tableName = "testsynctabletosql";
@@ -65,7 +65,7 @@
                 SqlConnection = "Server=localhost;Database=King.BTrak.Data;Trusted_Connection=True;",
                 SqlTableName = "TableData",
                 StorageTableName = "sqlserverdata",
-                SyncDirection = Direction.SqlToTable,
+                Direction = Direction.SqlToTable,
             };
 
             var id = Guid.NewGuid();

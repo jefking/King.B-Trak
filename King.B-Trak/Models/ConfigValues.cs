@@ -45,7 +45,7 @@
         /// <summary>
         /// Sync Direction
         /// </summary>
-        public Direction SyncDirection
+        public Direction Direction
         {
             get;
             set;

@@ -55,9 +55,9 @@
 
             var sqlSchemaReader = new SchemaReader(config.SqlConnection);
             var executor = new Executor(new SqlConnection(config.SqlConnection));
-            this.direction = config.SyncDirection;
+            this.direction = config.Direction;
 
-            switch (config.SyncDirection)
+            switch (config.Direction)
             {
                 case Direction.TableToSql:
                     this.tableReader = new TableStorageReader(new AzureStorageResources(config.StorageAccountConnection), config.StorageTableName);

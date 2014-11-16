@@ -73,10 +73,10 @@
             var expected = Direction.SqlToTable;
             var c = new ConfigValues
             {
-                SyncDirection = expected,
+                Direction = expected,
             };
 
-            Assert.AreEqual(expected, c.SyncDirection);
+            Assert.AreEqual(expected, c.Direction);
         }
     }
 }
