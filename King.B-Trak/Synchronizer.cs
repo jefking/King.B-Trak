@@ -93,8 +93,10 @@
                     Trace.TraceInformation("Loading data from {0}.", from);
                     var sqlData = await this.sqlReader.Retrieve(sqlSchema);
 
-                    Trace.TraceInformation("Storing data to {0}.", to);
+                    Trace.TraceInformation("Initializing storage");
                     await this.tableWriter.Initialize();
+
+                    Trace.TraceInformation("Storing data in {0}.", to);
                     await this.tableWriter.Store(sqlData);
                     break;
                 case Direction.TableToSql:
@@ -106,8 +108,10 @@
                     Trace.TraceInformation("Loading data {0}.", from);
                     var tableData = await this.tableReader.Retrieve(tableSchema);
 
-                    Trace.TraceInformation("Storing data to {0}.", to);
+                    Trace.TraceInformation("Initializing storage");
                     await this.sqlWriter.Initialize();
+
+                    Trace.TraceInformation("Storing data in {0}.", to);
                     await this.sqlWriter.Store(tableData);
                     break;
             }
