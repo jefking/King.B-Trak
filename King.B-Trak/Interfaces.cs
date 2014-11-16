@@ -38,18 +38,32 @@
     }
     #endregion
 
+    #region IInitializer
+    /// <summary>
+    /// Initializer
+    /// </summary>
+    public interface IInitializer
+    {
+        /// <summary>
+        /// Initialize
+        /// </summary>
+        /// <returns>Success</returns>
+        Task<bool> Initialize();
+    }
+    #endregion
+
     #region ITableStorageWriter
     /// <summary>
-    /// 
+    /// Table Storage Writer Interface
     /// </summary>
-    public interface ITableStorageWriter
+    public interface ITableStorageWriter : IInitializer
     {
         #region Methods
         /// <summary>
-        /// 
+        /// Store Data
         /// </summary>
-        /// <param name="tables"></param>
-        /// <returns></returns>
+        /// <param name="tables">Tables</param>
+        /// <returns>Task</returns>
         Task Store(IEnumerable<TableSqlData> tables);
         #endregion
     }
@@ -105,7 +119,7 @@
     /// <summary>
     /// SQL Data Writer Interface
     /// </summary>
-    public interface ISqlDataWriter
+    public interface ISqlDataWriter : IInitializer
     {
         #region Methods
         /// <summary>

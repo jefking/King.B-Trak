@@ -94,6 +94,7 @@
                     var sqlData = await this.sqlReader.Retrieve(sqlSchema);
 
                     Trace.TraceInformation("Storing data to {0}.", to);
+                    await this.tableWriter.Initialize();
                     await this.tableWriter.Store(sqlData);
                     break;
                 case Direction.TableToSql:
@@ -106,6 +107,7 @@
                     var tableData = await this.tableReader.Retrieve(tableSchema);
 
                     Trace.TraceInformation("Storing data to {0}.", to);
+                    await this.sqlWriter.Initialize();
                     await this.sqlWriter.Store(tableData);
                     break;
             }
