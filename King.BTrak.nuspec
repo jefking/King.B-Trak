@@ -21,11 +21,11 @@
       <dependency id="King.Azure" />
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System" targetFramework="net451" />
-      <frameworkAssembly assemblyName="System.Xml" targetFramework="net451" />
+      <frameworkAssembly assemblyName="System" targetFramework="net45" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="net45" />
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="King.B-Trak\bin\Release\King.BTrak.dll" target="lib\net451\King.BTrak.dll" />
+    <file src="King.B-Trak\bin\Release\King.BTrak.dll" target="lib\net45\King.BTrak.dll" />
   </files>
 </package>
