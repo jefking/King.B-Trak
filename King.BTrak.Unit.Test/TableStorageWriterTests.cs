@@ -21,10 +21,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTableNull()
         {
-            new TableStorageWriter(null);
+            Assert.That(() => new TableStorageWriter(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

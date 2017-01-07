@@ -53,9 +53,9 @@
         /// Load Tables
         /// </summary>
         /// <returns>Tables</returns>
-        public IEnumerable<ITableStorage> Load()
+        public async Task<IEnumerable<ITableStorage>> Load()
         {
-            return from t in this.resources.Tables()
+            return from t in await this.resources.Tables()
                    where t.Name != this.tableName
                    select t;
         }

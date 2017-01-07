@@ -21,19 +21,19 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorStorageResourcesNull()
         {
             var tableName = Guid.NewGuid().ToString();
-            new TableStorageReader(null, tableName);
+            
+            Assert.That(() => new TableStorageReader(null, tableName), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNameNull()
         {
             var resources = Substitute.For<IAzureStorageResources>();
-            new TableStorageReader(resources, null);
+            
+            Assert.That(() => new TableStorageReader(resources, null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -45,7 +45,7 @@
         }
 
         [Test]
-        public void Load()
+        public async Task Load()
         {
             var tableName = Guid.NewGuid().ToString();
 
@@ -68,7 +68,7 @@
             resources.Tables().Returns(tables);
 
             var reader = new TableStorageReader(resources, tableName);
-            var results = reader.Load();
+            var results = await reader.Load();
 
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count());

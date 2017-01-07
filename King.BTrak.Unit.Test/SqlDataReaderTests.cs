@@ -26,43 +26,43 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorReaderNull()
         {
             var executor = Substitute.For<IExecutor>();
             var loader = Substitute.For<IDynamicLoader>();
             var tableName = Guid.NewGuid().ToString();
-            new SqlDataReader(executor, null, loader, tableName);
+            
+            Assert.That(() => new SqlDataReader(executor, null, loader, tableName), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorExecutorNull()
         {
             var reader = Substitute.For<ISchemaReader>();
             var loader = Substitute.For<IDynamicLoader>();
             var tableName = Guid.NewGuid().ToString();
-            new SqlDataReader(null, reader, loader, tableName);
+            
+            Assert.That(() => new SqlDataReader(null, reader, loader, tableName), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorLoaderNull()
         {
             var executor = Substitute.For<IExecutor>();
             var reader = Substitute.For<ISchemaReader>();
             var tableName = Guid.NewGuid().ToString();
-            new SqlDataReader(executor, reader, null, tableName);
+            
+            Assert.That(() => new SqlDataReader(executor, reader, null, tableName), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNameNull()
         {
             var executor = Substitute.For<IExecutor>();
             var reader = Substitute.For<ISchemaReader>();
             var loader = Substitute.For<IDynamicLoader>();
-            new SqlDataReader(executor, reader, loader, null);
+            
+            Assert.That(() => new SqlDataReader(executor, reader, loader, null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

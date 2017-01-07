@@ -38,10 +38,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorConfigNull()
         {
-            new Synchronizer(null);
+            Assert.That(() => new Synchronizer(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

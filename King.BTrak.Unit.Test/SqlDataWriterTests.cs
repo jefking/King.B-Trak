@@ -25,30 +25,30 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorReaderNull()
         {
             var executor = Substitute.For<IExecutor>();
             var tableName = Guid.NewGuid().ToString();
-            new SqlDataWriter(null, executor, tableName);
+            
+            Assert.That(() => new SqlDataWriter(null, executor, tableName), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorExecutorNull()
         {
             var reader = Substitute.For<ISchemaReader>();
             var tableName = Guid.NewGuid().ToString();
-            new SqlDataWriter(reader, null, tableName);
+            
+            Assert.That(() => new SqlDataWriter(reader, null, tableName), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNameNull()
         {
             var reader = Substitute.For<ISchemaReader>();
             var executor = Substitute.For<IExecutor>();
-            new SqlDataWriter(reader, executor, null);
+            
+            Assert.That(() => new SqlDataWriter(reader, executor, null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

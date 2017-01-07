@@ -51,7 +51,7 @@
                 ? Direction.SqlToTable : Direction.TableToSql;
             return new ConfigValues
             {
-                SyncDirection = direction,
+                Direction = direction,
                 SqlConnection = direction == Direction.SqlToTable ? first : second,
                 StorageAccountConnection = direction == Direction.TableToSql ? first : second,
                 StorageTableName = ConfigurationManager.AppSettings["StorageTable"],

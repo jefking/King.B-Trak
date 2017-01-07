@@ -103,7 +103,7 @@
         /// Load Tables
         /// </summary>
         /// <returns>Tables</returns>
-        IEnumerable<ITableStorage> Load();
+        Task<IEnumerable<ITableStorage>> Load();
 
         /// <summary>
         /// Retrieve Data

@@ -103,7 +103,7 @@
                     from = "Table Storage";
                     to = "SQL Server";
                     Trace.TraceInformation("Loading schema from {0}.", from);
-                    var tableSchema = this.tableReader.Load();
+                    var tableSchema = await this.tableReader.Load();
 
                     Trace.TraceInformation("Loading data {0}.", from);
                     var tableData = await this.tableReader.Retrieve(tableSchema);
