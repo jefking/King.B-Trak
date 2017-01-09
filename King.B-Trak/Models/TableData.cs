@@ -5,7 +5,7 @@
     /// <summary>
     /// Table Data
     /// </summary>
-    public class TableData
+    public class TableData : ITableData
     {
         #region Properties
         /// <summary>

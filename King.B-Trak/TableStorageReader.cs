@@ -65,9 +65,9 @@
         /// </summary>
         /// <param name="tables">Tables</param>
         /// <returns>Table Data</returns>
-        public async Task<IEnumerable<TableData>> Retrieve(IEnumerable<ITableStorage> tables)
+        public async Task<IEnumerable<ITableData>> Retrieve(IEnumerable<ITableStorage> tables)
         {
-            var datas = new List<TableData>();
+            var datas = new List<ITableData>();
             foreach (var table in tables)
             {
                 Trace.TraceInformation("Reading from table: {0}.", table.Name);

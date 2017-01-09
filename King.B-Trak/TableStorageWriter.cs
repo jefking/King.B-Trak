@@ -50,7 +50,7 @@
         /// </summary>
         /// <param name="tables">Tables</param>
         /// <returns>Task</returns>
-        public virtual async Task Store(IEnumerable<TableSqlData> tables)
+        public virtual async Task Store(IEnumerable<ITableSqlData> tables)
         {
             foreach (var tableData in tables)
             {

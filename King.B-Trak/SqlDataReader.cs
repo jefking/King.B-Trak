@@ -85,9 +85,9 @@
         /// </summary>
         /// <param name="schemas">Schemas</param>
         /// <returns>Table Data</returns>
-        public virtual async Task<IEnumerable<TableSqlData>> Retrieve(IEnumerable<IDefinition> schemas)
+        public virtual async Task<IEnumerable<ITableSqlData>> Retrieve(IEnumerable<IDefinition> schemas)
         {
-            var tables = new List<TableSqlData>();
+            var tables = new List<ITableSqlData>();
             foreach (var schema in schemas)
             {
                 var sql = string.Format(SqlStatements.SelectDataFormat, schema.Preface, schema.Name);

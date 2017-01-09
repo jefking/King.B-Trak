@@ -1,5 +1,7 @@
 ﻿namespace King.BTrak.Models
 {
+    using System.Collections.Generic;
+    
     #region IConfigValues
     /// <summary>
     /// Configuration Values
@@ -45,6 +47,53 @@
         Direction Direction
         {
             get;
+        }
+        #endregion
+    }
+    #endregion
+
+    #region ITableData
+    /// <summary>
+    /// Table Data Interface
+    /// </summary>
+    public interface ITableData
+    {
+        #region Properties
+        /// <summary>
+        /// Row Data
+        /// </summary>
+        IEnumerable<IDictionary<string, object>> Rows
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Table Name
+        /// </summary>
+        string TableName
+        {
+            get;
+            set;
+        }
+        #endregion
+    }
+    #endregion
+
+    #region ITableSqlData
+    /// <summary>
+    /// Table Data Interface
+    /// </summary>
+    public interface ITableSqlData : ITableData
+    {
+        #region Properties
+        /// <summary>
+        /// Primary Key Columns
+        /// </summary>
+        IEnumerable<string> PrimaryKeyColumns
+        {
+            get;
+            set;
         }
         #endregion
     }
