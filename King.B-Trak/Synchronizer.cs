@@ -80,8 +80,8 @@
         /// <returns>Task</returns>
         public virtual async Task Run()
         {
-            var from = string.Empty;
-            var to = string.Empty;
+            string from = null;
+            string to = null;
             switch (this.direction)
             {
                 case Direction.SqlToTable:
