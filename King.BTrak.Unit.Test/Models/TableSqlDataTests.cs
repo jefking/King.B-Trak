@@ -14,6 +14,12 @@
         }
 
         [Test]
+        public void IsITableSqlData()
+        {
+            Assert.IsNotNull(new TableSqlData() as ITableSqlData);
+        }
+
+        [Test]
         public void IsTableData()
         {
             Assert.IsNotNull(new TableSqlData() as TableData);

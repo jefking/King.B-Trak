@@ -15,6 +15,12 @@
         }
 
         [Test]
+        public void IsITableData()
+        {
+            Assert.IsNotNull(new TableData() as ITableData);
+        }
+
+        [Test]
         public void Name()
         {
             var expected = Guid.NewGuid().ToString();
