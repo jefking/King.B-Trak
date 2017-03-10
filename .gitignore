@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+*.jfm
 
 # Build results
 [Dd]ebug/
@@ -172,5 +173,9 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-NuGet Packages
+# NuGet Packages
 *.nupkg
+
+# New VS, New Projects
+*.lock.json
+.vs
