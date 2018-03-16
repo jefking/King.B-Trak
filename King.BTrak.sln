@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.BTrak.Core", "King.B-Trak\King.BTrak.Core.csproj", "{416CE6C0-DA4D-44A4-9E98-A8B7A8B17F16}"
 EndProject
@@ -14,13 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.BTrak.Integration.Test", "King.BTrak.Integration.Test\King.BTrak.Integration.Test.csproj", "{A0522D30-E6E6-4F4E-9406-F926E73994FF}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "King.BTrak.Data", "King.BTrak.Data\King.BTrak.Data.sqlproj", "{B6D387A1-8ACC-4E31-A934-EA8DBA4F8852}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3DB9CBF4-47DA-4AFC-A9E1-B552861B03E0}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9C7527F1-8125-4C7D-A71B-E891F8EA84B4}"
 EndProject
@@ -78,5 +71,8 @@ Global
 		{A0522D30-E6E6-4F4E-9406-F926E73994FF} = {3C3F7E76-7CB4-4EFB-A139-3080A795551B}
 		{B6D387A1-8ACC-4E31-A934-EA8DBA4F8852} = {3C3F7E76-7CB4-4EFB-A139-3080A795551B}
 		{6BBB37B8-1423-42CA-BD90-DD5B343C8570} = {9C7527F1-8125-4C7D-A71B-E891F8EA84B4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FAEFCF4-F227-4094-85E9-E17F04884D74}
 	EndGlobalSection
 EndGlobal
