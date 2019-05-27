@@ -12,3 +12,6 @@ View the wiki to learn how to use this.
 
 ### [Example](https://github.com/jefking/King.B-Trak/tree/master/King.BTrak.Program)
 Clone the repository to play with the demo!
+
+### CI
+[![Build status](https://dev.azure.com/jefkin/oss/_apis/build/status/King.B-Trak)](https://dev.azure.com/jefkin/oss/_build/latest?definitionId=17)
